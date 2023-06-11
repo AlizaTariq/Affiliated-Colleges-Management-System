@@ -1,0 +1,150 @@
+.myLoginBtn {
+  width: 70%;
+  border-radius: 25px;
+  outline: none;
+  border: none;
+  background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+  background-size: 200%;
+  font-size: 1.2rem;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  text-transform: uppercase;
+  transition: 0.5s;
+}
+
+.myLoginBtn:hover {
+  background-position: right;
+}
+.pic {
+  width: 25%;
+}
+#intro {
+  background-image: url("https://mdbootstrap.com/img/new/fluid/city/018.jpg");
+  height: 100vh;
+}
+
+/* Height for devices larger than 576px */
+@media (min-width: 992px) {
+  #intro {
+    margin-top: -58.59px;
+  }
+}
+/* 
+.navbar .nav-link {
+  color: #fff !important;
+} */
+.childO {
+  width: 50%;
+  padding: 5%;
+  float: right;
+}
+
+.childT {
+  width: 50%;
+  padding: 5%;
+  float: left;
+}
+
+#immg {
+  border-radius: 20%;
+  width: 90%;
+  height: 20%;
+}
+.forcenter {
+  align-items: center;
+  text-align: center;
+}
+#marquees {
+  color: #ffdb58;
+  margin-top: 30px;
+  font-style: italic;
+}
+/* .video-background {
+  position:relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+} */
+
+/* .video-background {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+} */
+
+.forcenterOne {
+  align-items: center;
+  text-align: center;
+  padding-top: 2%;
+}
+.forcenterOne img {
+  width: 10%;
+  width: 10%;
+}
+/* .btnClose .MuiPaper-root{
+  padding:2%;
+  text-transform: lowercase;
+  color:  rgba(2, 250, 23, 0.897);
+} */
+
+.dialogTitle {
+  color: rgba(2, 250, 23, 0.897);
+}
+.custom-dialog-actions .btnClose {
+  text-transform: lowercase;
+  color: rgba(255, 0, 0, 0.897);
+}
+
+/* .custom-dialog {
+  background-color: red; /* Replace 'red' with the desired background color */
+
+.custom-dialog .MuiPaper-root {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}
+
+/* images */
+#img1 {
+  width: 80%;
+  height: 80%;
+}
+#img2 {
+  width: 85%;
+  height: 85%;
+  padding-left: 35px;
+}
+#img3 {
+  width: 75%;
+  height: 80%;
+  padding-top: 20px;
+}
+#img4 {
+  width: 85%;
+  height: 90%;
+  padding-left: 50px;
+  padding-top: 30px;
+}
+/* divs */
+#d1 {
+  border-bottom: 2px solid white;
+  border-right: 2px solid white;
+}
+#d2 {
+  border-bottom: 2px solid white;
+  border-left: 2px solid white;
+}
+#d3 {
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+}
+#d4 {
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+}

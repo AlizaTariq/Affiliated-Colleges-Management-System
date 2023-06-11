@@ -1,0 +1,44 @@
+.tableTexthere {
+  width: 200px;
+  color: #fff;
+}
+.tableTextStars {
+  width: 140px;
+  color: #fff;
+}
+.tableTextOne {
+  width: 500px;
+  color: #fff;
+}
+
+/* .tableTextOne {
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;
+} */
+
+.collegeReviewDetail {
+  background-color: teal;
+}
+
+.collegeReviewDetail:hover {
+  background-color: rgb(4, 105, 105);
+}
+.bodyModal .modal-content {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.bodyModal {
+  background-color: rgb(3, 0, 19);
+}
+.btnModalClose {
+  background-color: teal;
+}
+.btnModalClose:hover {
+  background-color: rgb(4, 105, 105);
+}

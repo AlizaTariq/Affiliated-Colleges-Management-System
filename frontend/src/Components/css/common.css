@@ -1,0 +1,25 @@
+* {
+  /* color: white; */
+  font-size: 18px;
+  font-family: Glowing Midnight Verdana;
+  /* background-image: linear-gradient( */
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* color: white; */
+  font-size: 20px;
+  font-family: UnitedKings_PERSONAL_USE_ONLY Verdana;
+  /* background-image: linear-gradient( */
+}
+p {
+  font-size: 12px;
+  font-family: Verdana;
+}
+.pagination li {
+  color: beige;
+  margin-right: 10px; /* Add desired margin between page numbers */
+}

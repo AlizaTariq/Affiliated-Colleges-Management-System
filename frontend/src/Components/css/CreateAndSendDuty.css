@@ -1,0 +1,33 @@
+/* .body {
+  font-family: Verdana;
+  color: #fff; */
+  /* text-align: center; */
+  /* justify-content: center; */
+  /* display: flex;  */
+  /* padding-top: 90px;
+  padding-bottom: 90px;
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+  color: rgba(2, 250, 23, 0.897);
+} */
+
+.myheading {
+  color: rgba(2, 250, 23, 0.897);
+}
+
+.sendDuty1,
+.sendDuty2 {
+  background-color: teal;
+  margin-top: 5%;
+  float: right;
+}
+.sendDuty1:hover,
+.sendDuty2:hover {
+  background-color: rgb(4, 105, 105);
+}

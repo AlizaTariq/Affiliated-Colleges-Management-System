@@ -1,0 +1,57 @@
+.collegeReviewDetail {
+  background-color: teal;
+}
+
+.collegeReviewDetail:hover {
+  background-color: rgb(4, 105, 105);
+}
+
+/* .bodyModal {
+  background-color: rgb(3, 0, 19);
+}
+
+.bodyModal .modal-content {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+} */
+
+.bodyModal .modal-content {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}
+
+.bodyModal {
+  background-color: rgb(3, 0, 19);
+}
+/* 
+.bodyModal{
+  background-color: rgb(3, 0, 19);
+}
+.bodyModal .modal-dialog {
+ 
+  background-color: rgb(3, 0, 19);
+}
+
+.bodyModal .modal-content .modal-header {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+}
+
+.bodyModal .modal-content .modal-body {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+}
+
+.bodyModal .modal-content .modal-footer {
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+} */
+
+.btnModalClose {
+  background-color: teal;
+}
+.btnModalClose:hover {
+  background-color: rgb(4, 105, 105);
+}

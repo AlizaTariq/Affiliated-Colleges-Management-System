@@ -1,0 +1,55 @@
+.ntfPage {
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    #01263a,
+    black
+  );
+}
+.ntfButton {
+  background-color: teal;
+}
+.ntfButton:hover {
+  background-color: rgb(4, 105, 105);
+}
+
+#ntfText {
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: small;
+}
+.ntfImg {
+  width: 90%;
+  height: 70%;
+  border-radius: 50%;
+  margin: 10px;
+  border: 5px solid teal;
+  padding: 3px;
+  background-color: white;
+  max-width: 540px;
+  max-height: 200px;
+}
+/* .ntfCardPractical {
+  height: 10%;
+  color: blue;
+  border-radius: 100px;
+  background-color: green;
+} */
+.ntfCardPr {
+  background-color: gray;
+  opacity: 90%;
+}
+
+.ntfHeading {
+  color: white;
+  font-size: large;
+  font-weight: bold;
+}
+
+#emptyNtf {
+  color: rgba(2, 250, 23, 0.897);
+  font-size: 30px;
+  font-family: UnitedKings_PERSONAL_USE_ONLY Verdana;
+  margin: 10%;
+}

@@ -1,0 +1,76 @@
+/* #showDutyDetailPrac {
+  background-color: #00131c;
+  font-family: Verdana;
+  color: #fff;
+  margin: 2px 2px;
+} */
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+body {
+  font-family: Verdana;
+  overflow-y: scroll; /* Add this line to enable vertical scrollbar */
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+}
+
+.mainHeading {
+  text-align: center;
+  padding-top: 10%;
+  color: rgba(2, 250, 23, 0.897);
+}
+
+.mainDiv {
+  font-family: Verdana;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-bottom: 30px;
+}
+
+.childOne {
+  width: 50%;
+  padding: 5%;
+  float: left;
+}
+
+.childTwo {
+  width: 50%;
+  padding: 5%;
+  float: right;
+}
+
+.card-title {
+  text-align: center;
+}
+
+.backButton {
+  text-align: center;
+  font-weight: bold;
+}
+
+#backBtn {
+  color: #fff;
+  background-color: teal;
+  text-align: center;
+  font-weight: bold;
+  font-style: Verdana;
+  width: 10%;
+  height: 30%;
+  border-radius: 10px;
+}
+
+.showDutyDetailPrac {
+  color: black;
+  margin: 2px;
+  padding: 2px;
+  font-family: Verdana;
+}

@@ -1,0 +1,50 @@
+.body {
+  font-family: Verdana;
+  color: #fff;
+  /* text-align: center; */
+  /* justify-content: center; */
+  /* display: flex;  */
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+  color: rgba(2, 250, 23, 0.897);
+}
+
+.headingTable {
+  font-size: larger;
+  border: 2px;
+  color: rgba(2, 250, 23, 0.897);
+  font-weight: bolder;
+}
+
+.tableText {
+  color: white;
+}
+.searchBar {
+  flood-opacity: right;
+  margin-right: 10%;
+}
+#searchBarInput {
+  margin-top: 20%;
+  width: auto;
+  height: 40px;
+
+  padding: 5%;
+}
+
+.btnDuty1,
+btnDuty2 {
+  background-color: teal;
+}
+
+.btnDuty1:hover,
+btnDuty2:hover {
+  background-color: rgb(4, 105, 105);
+}

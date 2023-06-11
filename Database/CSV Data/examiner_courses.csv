@@ -1,0 +1,72 @@
+examiner_crs_id,examiner_id,examiner_crs_name
+1,3,Web Engineering Lab
+2,3,Virtual Systems and Services
+3,3,Technologies Programming Fundamentals Lab
+4,3,System and Network Administration
+5,3,"Software Design & 
+ Architecture"
+6,3,Software Construction and Development Lab
+7,3,Operating Systems Lab
+8,3,Object Oriented Programming Lab
+9,3,Introduction to ICT Lab
+10,3,Digital Logic Design Lab
+11,3,Database Systems Lab
+12,3,Data Structures and Algorithms Lab
+13,3,Computer Organization and Assembly Language Lab
+14,2,Web Engineering Lab
+15,2,Technologies Programming Fundamentals Lab
+16,2,Software Construction and Development Lab
+17,2,Programming Fundamentals Lab
+18,2,Programming Fundamentals
+19,2,Operating Systems Lab
+20,2,Operating Systems
+21,2,Object Oriented Programming Lab
+22,2,Introduction to ICT Lab
+23,2,Digital Logic Design Lab
+24,2,Database Systems Lab
+25,2,Data Structures and Algorithms Lab
+26,2,Computer Organization and Assembly Language Lab
+27,4,Web Engineering Lab
+28,4,Technologies Programming Fundamentals Lab
+29,4,Software Construction and Development Lab
+30,4,Operating Systems Lab
+31,4,Object Oriented Programming Lab
+32,4,Object Oriented Programming
+33,4,Introduction to information and communication Lab
+34,4,Introduction to ICT Lab
+35,4,Introduction to ICT
+36,4,Digital Logic Design Lab
+37,4,Database Administration and Management
+38,4,Data Structures and Algorithms Lab
+39,4,Computer Organization and Assembly Language Lab
+40,4,Computer Networks Lab
+41,5,Web Engineering Lab
+42,5,Technologies Programming Fundamentals Lab
+43,5,Software Construction and Development Lab
+44,5,Operating Systems Lab
+45,5,Object Oriented Programming Lab
+46,5,Introduction to ICT Lab
+47,5,Digital Logic Design Lab
+48,5,Database Systems Lab
+49,5,Database Systems
+50,5,Database Administration and Management
+51,5,Data Structures and Algorithms Lab
+52,5,Computer Organization and Assembly Language Lab
+53,5,Computer Networks Lab
+54,1,Web Engineering Lab
+55,1,Technologies Programming Fundamentals Lab
+56,1,Software Construction and Development Lab
+57,1,Operating Systems Lab
+58,1,Object Oriented Programming Lab
+59,1,Introduction to ICT Lab
+60,1,Digital Logic Design Lab
+61,1,Database Administration and Management
+62,1,Data Structures and Algorithms Lab
+63,1,Data Structures and Algorithms
+64,1,Data Structures & Algorithms Lab
+65,1,Data Strcutures and Algorithms Lab
+66,1,Computer Organization and Assembly Language Lab
+67,1,Computer Organisation and Assembly Language Lab
+68,1,Computer Networks Lab
+69,1,Computer Networks
+70,1,Comp Organization & Assembly Lang. Lab

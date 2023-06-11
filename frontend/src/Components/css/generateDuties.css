@@ -1,0 +1,155 @@
+.ShowDutyMainDiv {
+  font-family: Verdana;
+  color: #fff;
+  /* text-align: center; */
+  /* justify-content: center; */
+  /* display: flex;  */
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background-color: #00131c;
+}
+.showDutyBtn {
+  justify-content: right;
+  margin: 2px;
+}
+#fallBtn {
+  position: relative;
+  float: center;
+  background-color: rgb(140, 203, 45);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  margin-left: 30%;
+  font-size: 16px;
+}
+
+#springBtn {
+  position: relative;
+  float: center;
+  background-color: rgb(110, 107, 107);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+#ViewDutyBtn {
+  position: relative;
+  float: center;
+  background-color: rgb(55, 7, 167);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+.showDutyMainMainDiv {
+  /* padding: 0;
+      margin: 0;
+      box-sizing: border-box; */
+  width: 100%;
+  background-size: cover;
+  padding-bottom: 50px;
+}
+.showDutyMainMainDiv,
+.showDutyh1 {
+  text-align: center;
+  padding: 30px 0px;
+}
+.showDutyContainer {
+  width: 100%;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
+}
+.duty-items {
+  flex-basis: 23%;
+  margin: 10px 0px;
+  text-align: center;
+  padding: 20px 0px;
+  background: #2c3338;
+  border-radius: 7px;
+  box-shadow: 0px 0px 10px 3px black;
+
+  position: relative;
+}
+.dutyItemh3 {
+  padding: 10px 0px;
+}
+.showDutyp {
+  text-align: left;
+  font-size: 12px;
+  padding: 0 5px 0 5px;
+  padding-left: 10px;
+  font-weight: normal;
+}
+#submitBtn {
+  background-color: teal;
+  font-family: Verdana;
+  font-size: 10px;
+  width: 50%;
+  border-radius: 7px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 2%;
+
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+}
+#submitBtn:hover {
+  background-color: teal;
+  font-family: Verdana;
+  font-size: 12px;
+  width: 50%;
+  border-radius: 7px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 2%;
+}
+
+.duty-items:hover {
+  background-color: #dba617;
+}
+.duty-items:hover .dutyItemh3,
+.showDutyp :hover {
+  color: #fff;
+}
+.duty-items:hover #submitBtn {
+  background-color: #fff;
+  color: #dba617;
+}
+
+.dutyStatus .showDutyp {
+  text-align: right;
+  align-items: right;
+  color: rgb(140, 203, 45);
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.searchBar {
+  margin-left: 3%;
+  width: 30%;
+  padding-bottom: 3%;
+}
+
+#searchBarInput {
+  width: auto;
+  height: 50px;
+  border: 3px #dba617;
+  border-radius: 3%;
+  border: #00131c;
+}

@@ -1,0 +1,55 @@
+.body {
+  font-family: Verdana;
+  overflow-y: scroll; /* Add this line to enable vertical scrollbar */
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+}
+.buttonsDiv {
+  width: fit-content;
+  margin: auto;
+}
+.mainHeading {
+  text-align: center;
+  padding-top: 4%;
+  color: rgba(2, 250, 23, 0.897);
+}
+.back {
+  background-color: teal;
+  float: right;
+  color: #fff;
+  padding: 1rem 1rem !important;
+}
+.back:hover {
+  background-color: rgb(4, 105, 105);
+}
+.courseCardBtn {
+  color: #fff;
+  background-color: teal;
+  text-align: center;
+  font-weight: bold;
+  font-style: Verdana;
+  width: 10%;
+  height: 30%;
+  border-radius: 10px;
+}
+
+.courseCardBtn:hover {
+  color: #fff;
+  background-color: teal;
+  text-align: center;
+  font-weight: bold;
+  font-style: Verdana;
+  width: 10%;
+  height: 30%;
+  border-radius: 10px;
+}
+.One {
+  width: 100%;
+  /* padding: 5%; */
+}

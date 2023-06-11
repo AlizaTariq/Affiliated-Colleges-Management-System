@@ -1,0 +1,4 @@
+exam_duty_id,examiner_id,request_date,paper_upload_deadline,paper_date,result_upload_deadline,status_req,paper,result,rd_id,rd_dept,rd_year,rd_crs_code
+5,5,2023-06-02,2023-07-02,,2023-07-07,1,,,122,cs,2020,CS 206
+7,4,,,,,0,,,107,cs,2020,CS 104
+6,4,2023-06-02,2023-07-02,,2023-07-07,1,,,107,cs,2020,CS 104

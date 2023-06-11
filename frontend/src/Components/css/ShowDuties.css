@@ -1,0 +1,273 @@
+.ShowDutyMainDiv {
+  font-family: Verdana;
+  color: #fff;
+  /* text-align: center; */
+  /* justify-content: center; */
+  /* display: flex;  */
+  padding-top: 90px;
+  padding-bottom: 90px;
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+  color: rgba(2, 250, 23, 0.897);
+}
+
+.showDutyBtn {
+  justify-content: right;
+  margin: 2px;
+}
+#acceptBtn {
+  position: relative;
+  float: right;
+  background-color: rgb(140, 203, 45);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#acceptBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(100, 145, 33);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#notAssignedBtn {
+  position: relative;
+  float: right;
+  background-color: rgb(110, 107, 107);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#notAssignedBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(71, 70, 70);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+#showAllBtn {
+  position: relative;
+  float: right;
+  background-color: rgb(55, 7, 167);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#showAllBtn:hover {
+  position: relative;
+  float: right;
+  background-color: rgb(43, 5, 133);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+#pendingBtn {
+  position: relative;
+  float: right;
+  background-color: #f9a703;
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#pendingBtn:hover {
+  position: relative;
+  float: right;
+  background-color: #c48303;
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+.showDutyTableBtn {
+  position: relative;
+  float: left;
+  background-color: rgb(18, 138, 82);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+.showDutyTableBtn:hover {
+  position: relative;
+  float: left;
+  background-color: rgb(14, 104, 62);
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  margin-top: 10px;
+  font-size: 17px;
+}
+#rejectBtn {
+  position: relative;
+  float: right;
+  background-color: #ce0202;
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+#rejectBtn:hover {
+  position: relative;
+  float: right;
+  background-color: #a30000;
+  color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  font-weight: bold;
+  margin: 3px;
+  font-size: 16px;
+}
+
+.showDutyMainMainDiv {
+  /* padding: 0;
+    margin: 0;
+    box-sizing: border-box; */
+  width: 100%;
+  background-size: cover;
+  padding-bottom: 50px;
+}
+.showDutyMainMainDiv,
+.showDutyh1 {
+  text-align: center;
+  padding: 30px 0px;
+}
+.showDutyContainer {
+  width: 100%;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  display: flex;
+}
+.duty-items {
+  flex-basis: 23%;
+  margin: 10px 0px;
+  text-align: center;
+  padding: 20px 0px;
+  background: #2c3338;
+  border-radius: 7px;
+  box-shadow: 0px 0px 10px 3px black;
+
+  position: relative;
+}
+.dutyItemh3 {
+  padding: 10px 0px;
+}
+.showDutyp {
+  text-align: left;
+  font-size: 12px;
+  padding: 0 5px 0 5px;
+  padding-left: 10px;
+  font-weight: normal;
+}
+#submitBtn {
+  background-color: teal;
+  font-family: Verdana;
+  font-size: 10px;
+  width: 50%;
+  border-radius: 7px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 2%;
+
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+}
+#submitBtn:hover {
+  background-color: rgb(4, 105, 105);
+  font-family: Verdana;
+  font-size: 10px;
+  width: 50%;
+  border-radius: 7px;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 2%;
+
+  position: absolute;
+  bottom: 5px;
+  right: 0px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 7px;
+}
+
+.duty-items:hover {
+  background-color: #dba617;
+}
+.duty-items:hover .dutyItemh3,
+.showDutyp :hover {
+  color: #fff;
+}
+.duty-items:hover #submitBtn {
+  background-color: #fff;
+  color: #dba617;
+}
+
+.dutyStatus .showDutyp {
+  text-align: right;
+  align-items: right;
+  color: rgb(140, 203, 45);
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.searchBar {
+  margin-left: 3%;
+  width: 30%;
+  padding-bottom: 3%;
+}
+
+#searchBarInput {
+  width: auto;
+  height: 50px;
+  border: 3px #dba617;
+  border-radius: 5%;
+  padding: 5%;
+  border: #00131c;
+}
