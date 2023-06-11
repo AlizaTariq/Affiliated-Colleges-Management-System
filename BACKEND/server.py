@@ -278,6 +278,32 @@ def sendPracticalDuty():
     return jsonify(userdata)
 
 
+#Prifile data 
+@app.route("/getProfileInfoExm",methods=['POST'])
+def getProfileInfoExm():
+    print("\n\n\n\tIn profile info examiner function")
+    data = request.get_json()
+    print("In profile info examiner functions data is : ",data)
+    email=data['email']
+    if email is None:
+        return jsonify({'success': False,data : NULL})
+
+    profileData=dbModel.getProfileData(email)
+    if profileData is None:
+        return jsonify({'success': False,data : NULL})
+
+    print("pract data send is data is : ",email)
+    
+    userdata = {
+        'success':True,
+        'data':profileData,
+    }
+    return jsonify(userdata)
+
+
+
+
+
 #Update notifications of admin
 @app.route('/updateAdminNtf', methods=['POST'])
 def updateAdminNtf():

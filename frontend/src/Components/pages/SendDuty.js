@@ -15,6 +15,7 @@ import Login from "./Login";
 import Schedule from "./Schedule";
 import NavBar from "./NavBar";
 import { useNavigate, createSearchParams } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
 
 const SendDuty = (props) => {
   const [teacherName, setTeacherName] = useState(
@@ -32,6 +33,12 @@ const SendDuty = (props) => {
 
   const [sendValue, setSendValue] = useState(false);
   const [backBtnValue, setBackBtnValue] = useState(false);
+  const [selectedExaminer, setSelectedExaminer] = useState(
+    props.ClgCrsData.examiners[0][2]
+  );
+  const [profileData, setProfileData] = useState([]);
+  const [lgShow, setLgShow] = useState(false);
+
   const accessToken = localStorage.getItem("access_token");
   const navigate = useNavigate();
 
@@ -43,6 +50,7 @@ const SendDuty = (props) => {
     );
     setTeacherRank(selectedRow[4]);
     setTeacherEmail(selectedRow[2]);
+    setSelectedExaminer(selectedRow[2]);
   };
 
   const handleTeacherRankChange = (event) => {
@@ -58,6 +66,7 @@ const SendDuty = (props) => {
     console.log("selected name is :", selectedRow, selectedRank);
     setTeacherName(selectedRow[1]);
     setTeacherEmail(selectedRow[2]);
+    setSelectedExaminer(selectedRow[2]);
   };
 
   const handleTeacherEmailChange = (event) => {
@@ -69,6 +78,7 @@ const SendDuty = (props) => {
     console.log("selected name is :", selectedRow, selectedEmail);
     setTeacherName(selectedRow[1]);
     setTeacherRank(selectedRow[4]);
+    setSelectedExaminer(selectedEmail);
   };
 
   const handleSendPracticalDuty = (event) => {
@@ -97,6 +107,30 @@ const SendDuty = (props) => {
         }
       })
       .then((data1) => console.log("practical sending data ", data1));
+  };
+
+  const handleExaminerProfile = () => {
+    fetch("http://127.0.0.1:5000/getProfileInfoExm", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: selectedExaminer,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data1) => {
+        if (data1.success) {
+          setProfileData(data1.data);
+          console.log("success", data1.data);
+          console.log("practical examiner data ", data1.data); // Move the console.log here
+        }
+      });
+  };
+
+  const handleClose = () => {
+    setLgShow(false);
   };
 
   const handleBackBtn = (event) => {
@@ -232,11 +266,60 @@ const SendDuty = (props) => {
                       <Button
                         className="schButton"
                         onClick={() => {
-                          navigate("/Profile");
+                          handleExaminerProfile();
+                          setLgShow(true);
                         }}
                       >
                         View Profile
                       </Button>{" "}
+                      <Modal
+                        size="lg"
+                        onHide={handleClose} // Add onHide prop to handle close action
+                        show={lgShow}
+                        aria-labelledby="example-modal-sizes-title-lg"
+                      >
+                        <Modal.Header closeButton>
+                          <Modal.Title id="example-modal-sizes-title-lg">
+                            Large Modal
+                          </Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                          {profileData && profileData[0] && (
+                            <>
+                              <h5>{profileData[0][0]}</h5>
+                              <br />
+                              <h5>{profileData[0][1]}</h5>
+                              <br />
+                              <h5>{profileData[0][2]}</h5>
+                              <br />
+                              <h5>{profileData[0][3]}</h5>
+                              <br />
+                              <h5>{profileData[0][4]}</h5>
+                              <br />
+                              <h5>{profileData[0][5]}</h5>
+                              <br />
+                              <h5>{profileData[0][6]}</h5>
+                              <br />
+                              <h5>{profileData[0][7]}</h5>
+                              <br />
+                              <h5>{profileData[0][8]}</h5>
+                              <br />
+                              <h5>{profileData[0][9]}</h5>
+                              <br />
+                              <h5>{profileData[0][10]}</h5>
+                              <br />
+                              <h5>{profileData[0][11]}</h5>
+                              <br />
+                              <h5>{profileData[0][12]}</h5>
+                              <br />
+                              <h5>{profileData[0][13]}</h5>
+                              <br />
+                              <h5>{profileData[0][14]}</h5>
+                              <br />
+                            </>
+                          )}
+                        </Modal.Body>
+                      </Modal>
                     </Col>
                   </Row>
 

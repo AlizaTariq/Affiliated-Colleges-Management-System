@@ -848,6 +848,29 @@ class DatabaseModel:
         finally:
             if cursor!=None:
                 cursor.close()
+    
+    #Get Examiner profile info
+    def getProfileData(self,email):
+        try:
+            if self.connection!=None:
+                cursor=self.connection.cursor()
+                query="select e.examiner_id,e.user_id,u.usr_name,u.usr_cnic,"\
+               " u.usr_email,u.usr_address,u.usr_bio,u.usr_gender,u.usr_phoneno,"\
+                "u.usr_profile_pic,e.institution,e.ranking,e.resume,"\
+                "e.acceptance_count,e.rejection_count"\
+                " from examiner e, users u where e.user_id=u.usr_id and u.usr_email=%s"
+
+                args=(email,)                    
+                cursor.execute(query,args)
+                profileData=cursor.fetchall()
+                print("profileData  --->" ,profileData)                
+                return profileData
+        except Exception as e:
+            print("Exception in profileData",str(e))
+        finally:
+            if cursor!=None:
+                cursor.close()
+
 
     #Get Practical Duty Count
     def getPracDutyCount(self):
