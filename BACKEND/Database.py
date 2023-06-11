@@ -1275,8 +1275,8 @@ class DatabaseModel:
     def SendReqforDuty(self,examDutyid):
         try:
             cursor = self.connection.cursor()
-            query = ("select u.usr_name,u.usr_email,rd.rd_crs_name,rd_crs_code,rd_dept"\
-                ",rd_semester from users u "\
+            query = ("select u.usr_name,u.usr_email,rd.rd_crs_name,rd.rd_crs_code,rd.rd_dept"\
+                ",rd.rd_semester from users u "\
                     "JOIN examiner e ON u.usr_id=e.user_id JOIN exam_duty ed "\
                     "ON e.examiner_id=ed.examiner_id JOIN roadmap rd ON "\
                     "rd.rd_id = ed.rd_id  where ed.exam_duty_id = %s;")

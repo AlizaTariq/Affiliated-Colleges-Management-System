@@ -6,6 +6,7 @@ import ShowDutiesEx from "./ShowDutiesEx";
 import userpic from "../images/avatar.svg";
 import Login from "./Login";
 import NavBar from "./NavBar";
+import AllDuties from "./AllDuties";
 export default function DutyDetailsEx() {
   const navigate = useNavigate();
   const { state } = useLocation();
