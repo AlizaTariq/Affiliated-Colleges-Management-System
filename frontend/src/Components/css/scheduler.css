@@ -33,3 +33,71 @@
 .backBtn:hover {
   background-color: rgb(4, 105, 105);
 }
+
+
+
+
+.scrollable-content {
+  max-height: 250px; /* Adjust the maximum height as needed */
+  overflow-y: auto;
+
+  background-color: #01263a;
+  color: #fff;
+
+  padding-left: 7%;
+  padding-right:7%;
+}
+
+.profileimgDiv{
+  /* align-items: center; */
+  background-color: #01263a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parent{
+  display:flex;
+  margin:3rem;
+  padding:1rem 1rem;
+  text-align:center;
+}
+.child1{
+  display:inline-block;
+  vertical-align: middle;
+  padding-left:4rem;
+  padding-right:5rem;
+  color:rgb(4, 244, 4);
+}
+.child2{
+  display:inline-block;
+  vertical-align: middle;
+  padding-left:5rem;
+  padding-right:4rem;
+  color:rgb(251, 43, 43);
+}
+
+
+
+.parentone{
+  display:flex;
+  margin:2rem;
+  /* padding:1rem 1rem; */
+  text-align:center;
+}
+.child
+{
+  display:inline-block;
+  vertical-align: middle;
+  padding-left:7rem;
+  padding-right:3rem;
+}
+
+.ptexthere{
+  font-size: 12px;
+  font-family: Verdana;
+}
+.custom-header .close {
+  color: white;
+  background-color: #fff;
+}

@@ -17,6 +17,8 @@ import NavBar from "./NavBar";
 import { useNavigate, createSearchParams } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
+import profile from "../images/profilepic-2.jpg";
+
 const SendDuty = (props) => {
   const [teacherName, setTeacherName] = useState(
     props.ClgCrsData.examiners[0][1]
@@ -161,7 +163,7 @@ const SendDuty = (props) => {
           <Row className="courseInfo">
             <Col lg="1"></Col>
             <Col lg="10">
-              <div className="schHeading">SEND DUTY</div>
+              <div className="schHeading">Send Duty</div>
             </Col>
             <Col lg="1"></Col>
           </Row>{" "}
@@ -171,19 +173,19 @@ const SendDuty = (props) => {
             <Col lg="1"></Col>
 
             <Col lg="10">
-              <div className="schHeading">COURSE COLLEGE DETAIL</div>
+              <div className="schHeading">Course College Detail</div>
               <div>
                 <h5>
                   <b>
                     <br />
-                    COLLEGE : {props.ClgCrsData.ClgDropdownValue}
+                    College : {props.ClgCrsData.ClgDropdownValue}
                     <br />
                     <br />
-                    DEPARTMENT : {props.ClgCrsData.deptValue}
+                    Department : {props.ClgCrsData.deptValue}
                     {props.dept}
                     <br />
                     <br />
-                    COURSE : {props.ClgCrsData.courseValue}
+                    Course : {props.ClgCrsData.courseValue}
                   </b>
                 </h5>
               </div>
@@ -195,14 +197,14 @@ const SendDuty = (props) => {
                 <Container>
                   <br />
                   <br />
-                  <div className="schHeading">ADD TEACHER INFORMATION</div>
+                  <div className="schHeading">Add Teacher Information</div>
                   <br />
                   <br />
 
                   <Row>
                     <Col lg="8">
                       <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Teacher Name</Form.Label>
+                        <Form.Label>Name</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           value={teacherName}
@@ -222,7 +224,7 @@ const SendDuty = (props) => {
 
                     <Col lg="2">
                       <Form.Group className="mb-3" controlId="formBasicEmail2">
-                        <Form.Label>Teacher Rank</Form.Label>
+                        <Form.Label>Rank</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           value={teacherRank}
@@ -244,7 +246,7 @@ const SendDuty = (props) => {
                   <Row>
                     <Col lg="6">
                       <Form.Group className="mb-3" controlId="formBasicEmail3">
-                        <Form.Label>Teacher Email address</Form.Label>
+                        <Form.Label>Email address</Form.Label>
                         <Form.Select
                           aria-label="Default select example"
                           value={teacherEmail}
@@ -278,44 +280,56 @@ const SendDuty = (props) => {
                         show={lgShow}
                         aria-labelledby="example-modal-sizes-title-lg"
                       >
-                        <Modal.Header closeButton>
-                          <Modal.Title id="example-modal-sizes-title-lg">
-                            Large Modal
+                        <Modal.Header style={{backgroundColor: '#01263a', color: '#fff' }} closeButton className="custom-header">
+                          <Modal.Title className="modalHeader" style={{backgroundColor: '#01263a', color: '#fff' }} id="example-modal-sizes-title-lg">
+                            <center><b>Profile</b></center>
                           </Modal.Title>
                         </Modal.Header>
-                        <Modal.Body>
+                        <Modal.Body style={{backgroundColor: '#01263a', color: '#fff' }}>
                           {profileData && profileData[0] && (
                             <>
-                              <h5>{profileData[0][0]}</h5>
-                              <br />
-                              <h5>{profileData[0][1]}</h5>
-                              <br />
-                              <h5>{profileData[0][2]}</h5>
-                              <br />
-                              <h5>{profileData[0][3]}</h5>
-                              <br />
-                              <h5>{profileData[0][4]}</h5>
-                              <br />
-                              <h5>{profileData[0][5]}</h5>
-                              <br />
-                              <h5>{profileData[0][6]}</h5>
-                              <br />
-                              <h5>{profileData[0][7]}</h5>
-                              <br />
-                              <h5>{profileData[0][8]}</h5>
-                              <br />
-                              <h5>{profileData[0][9]}</h5>
-                              <br />
-                              <h5>{profileData[0][10]}</h5>
-                              <br />
-                              <h5>{profileData[0][11]}</h5>
-                              <br />
-                              <h5>{profileData[0][12]}</h5>
-                              <br />
-                              <h5>{profileData[0][13]}</h5>
-                              <br />
-                              <h5>{profileData[0][14]}</h5>
-                              <br />
+                              <div className="profileimgDiv"><img src={profile} alt="profile" className="profile" /></div>
+                              <div className="parentone">
+                                  <div className="child">
+                                    <h6><b>Name: </b>{profileData[0][2]}</h6>
+                                    {/* <p className="ptexthere">{profileData[0][2]}</p> */}
+                                  </div>
+                                  <div className="child">
+                                    <h6><b>CNIC: </b>{profileData[0][3]}</h6>
+                                    {/* <p className="ptexthere">{profileData[0][3]}</p> */}
+                                  </div>
+                                </div>
+                                <div className="scrollable-content">
+                                
+                              
+                                <h6><b>Email: </b>{profileData[0][4]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][4]}</p> */}
+                                <h6><b>Address: </b>{profileData[0][5]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][5]}</p> */}
+                                <h6><b>Bio: </b>{profileData[0][6]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][6]}</p> */}
+                                <h6><b>Gender: </b>{profileData[0][7]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][7]}</p> */}
+                                <h6><b>Institute: </b>{profileData[0][10]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][10]}</p> */}
+                                <h6><b>Ranking: </b>{profileData[0][11]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][11]}</p> */}
+                                <h6><b>Resume: </b>{profileData[0][12]}</h6>
+                                {/* <p className="ptexthere">{profileData[0][12]}</p> */}
+                                <div className="Parent">
+                                  <div className="child1">
+                                    <h6><b>Acceptance Count: </b></h6>
+                                    <p className="ptexthere">{profileData[0][13]}</p>
+                                  </div>  
+                                  <div className="child2">
+                                    <h6><b>Rejection Count: </b></h6>
+                                    <p className="ptexthere">{profileData[0][14]}</p>
+                                  </div>
+                                </div>
+                                
+                              
+                              </div>
+                              
                             </>
                           )}
                         </Modal.Body>
