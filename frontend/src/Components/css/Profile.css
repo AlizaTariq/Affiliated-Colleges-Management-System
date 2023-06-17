@@ -14,6 +14,12 @@
   );
   color: rgba(2, 250, 23, 0.897);
 }
+.headinghere {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  padding: 5px;
+}
 .sub-main {
   display: flex;
   justify-content: center;
@@ -42,8 +48,6 @@
   padding-top: 5%;
 }
 p {
-  font-size: 20px;
-  font-family: Verdana;
   font-weight: bold;
   color: #fff;
 }
@@ -86,25 +90,21 @@ p {
 }
 #profilebtn {
   background-color: teal;
-  font-family: Verdana;
-  font-size: 10px;
   width: 50%;
   border-radius: 7px;
   color: #fff;
   border: none;
   font-weight: bold;
-  padding: 2%;
+  padding: 1%;
 }
 #profilebtn:hover {
-  background-color: teal;
-  font-family: Verdana;
-  font-size: 10px;
+  background-color: rgb(4, 105, 105);
   width: 50%;
   border-radius: 7px;
   color: #fff;
   border: none;
   font-weight: bold;
-  padding: 2%;
+  padding: 1%;
 }
 
 /* .container{
@@ -115,33 +115,35 @@ p {
   display: inline-block;
   padding: 1px 1px;
   /* border: 2px solid red; */
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 
 .block_container {
-  text-align: center;
+  /* text-align: center; */
   padding-top: 10px;
 }
 #p1 {
   display: inline-block;
+  text-align: left;
 }
 #p2 {
   display: inline-block;
+  text-align: left;
 }
 #p3 {
   display: inline-block;
+  text-align: left;
 }
 
 .labelText {
-  font-size: 12px;
-  font-family: Verdana;
+  /* font-size: 12px; */
   font-weight: bold;
   color: #fff;
 }
 .textField {
-  width: 35%;
+  width: 50%;
   height: 25px;
-  font-size: 10px;
+  /* font-size: 10px; */
   border-radius: 3px;
   border-top: none;
   border-top: none;
@@ -150,6 +152,8 @@ p {
   border-bottom: 1px solid grey;
   background-color: #2c3338;
   color: #fff;
+
+  padding: 3px;
 }
 /* .textField:hover{
     width: 37%;
@@ -164,9 +168,8 @@ p {
     color:#fff;
   } */
 
-textarea,
-.textField {
-  width: 90%;
+textarea {
+  width: 70%;
   padding-top: 10px;
   font-size: 13px;
   border-radius: 3px;
@@ -177,8 +180,7 @@ textarea,
   background-color: #2c3338;
   color: white;
 }
-textarea:hover,
-.textField:hover {
+textarea:hover {
   padding-top: 10px;
   font-size: 13px;
   border-radius: 3px;
@@ -192,31 +194,26 @@ textarea:hover,
 #gender {
   background-color: #2c3338;
   color: #fff;
-  font-family: Verdana;
   border-radius: 7px;
 }
 
 #submitbtn {
   background-color: teal;
-  font-family: Verdana;
-  font-size: 10px;
-  width: 30%;
+  width: 20%;
   border-radius: 7px;
   color: #fff;
   border: none;
   font-weight: bold;
-  padding: 2%;
+  padding: 1%;
 }
 #submitbtn:hover {
-  background-color: teal;
-  font-family: Verdana;
-  font-size: 10px;
-  width: 31%;
+  background-color: rgb(4, 105, 105);
+  width: 20%;
   border-radius: 7px;
   color: #fff;
   border: none;
   font-weight: bold;
-  padding: 2%;
+  padding: 1%;
 }
 
 /* .form-label{
@@ -244,3 +241,43 @@ textarea:hover,
 /* .name{
     font-size:70%;
 } */
+
+.containerhere {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-rowhere,
+.middle-rowhere,
+.bottom-rowhere,
+.last-rowhere {
+  display: flex;
+}
+
+.div1here,
+.div2here,
+.div3here,
+.div4here,
+.div5here,
+.div6here {
+  width: 300px;
+  height: 40px;
+  margin: 5px;
+  display: flex;
+  /* justify-content: center;
+  align-items: center; */
+  align-items: left;
+
+  gap: 5px;
+}
+
+.div7here,
+.div8here,
+.div9here {
+  width: 200px;
+  height: 40px;
+  margin: 5px;
+
+  gap: 10px;
+}

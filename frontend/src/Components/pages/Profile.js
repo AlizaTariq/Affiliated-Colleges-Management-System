@@ -16,10 +16,10 @@ const Profile = () => {
       <NavBar />
       <div className="main">
         <div className="heading">
-          <p>Profile</p>
+          <h2 className="headinghere">Profile</h2>
 
           <div className="sub-main">
-            <div className="back">
+            <div className="secSubMain">
               <div className="imgs">
                 <div className="container-image">
                   <img src={profile} alt="profile" className="profile" />
@@ -27,78 +27,83 @@ const Profile = () => {
                 <br></br>
                 <div>
                   <button type="submit" className="profilebtn" id="profilebtn">
-                    Edit Profile Picture Profile
+                    Edit Profile Picture
                   </button>
                 </div>
               </div>
               <br></br>
               <div className="forming text-center mb-3">
                 <form action="#" method="post">
-                  <div className="block_container">
-                    <div id="p1">
-                      <label className="labelText">First Name </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="fname"
-                        name="fname"
-                        placeholder="First Name"
-                      />
+                  <div className="containerhere">
+                    <div className="top-rowhere">
+                      <div className="div1here">
+                        <label className="labelText">First Name </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="fname"
+                          name="fname"
+                          placeholder="First Name"
+                        />
+                      </div>
+                      <div className="div2here">
+                        <label className="labelText">Last Name </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="lname"
+                          name="lname"
+                          placeholder="Last Name"
+                        />
+                      </div>
                     </div>
-                    <div id="p2">
-                      <label className="labelText">Last Name </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="lname"
-                        name="lname"
-                        placeholder="Last Name"
-                      />
+                    <div className="middle-rowhere">
+                      <div className="div3here">
+                        <label className="labelText">Username </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="username"
+                          name="username"
+                          placeholder="username"
+                        />
+                      </div>
+                      <div className="div4here">
+                        <label className="labelText">Email </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="email"
+                          name="email"
+                          placeholder="Email"
+                          email
+                        />
+                      </div>
                     </div>
-                    <div id="p3">
-                      <label className="labelText">Username </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="username"
-                        name="username"
-                        placeholder="username"
-                      />
+                    <div className="bottom-rowhere">
+                      <div className="div5here">
+                        <label className="labelText">Password </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                        />
+                      </div>
+                      <div className="div6here">
+                        <label className="labelText">Contact no. </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="contactNum"
+                          name="contactNum"
+                          placeholder="contactNum"
+                        />
+                      </div>
                     </div>
                   </div>
-                  <div className="block_container">
-                    <div id="p1">
-                      <label className="labelText">Email </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="email"
-                        name="email"
-                        placeholder="Email"
-                        email
-                      />
-                    </div>
-                    <div id="p2">
-                      <label className="labelText">Password </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="password"
-                        name="password"
-                        placeholder="password"
-                      />
-                    </div>
-                    <div id="p3">
-                      <label className="labelText">Contact no. </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="contactNum"
-                        name="contactNum"
-                        placeholder="contactNum"
-                      />
-                    </div>
-                  </div>
+
                   <br></br>
                   <div className="textArea">
                     <label className="labelText">Bio{"  "}</label>
@@ -109,34 +114,36 @@ const Profile = () => {
                       placeholder="Enter text here..."
                     ></textarea>
                   </div>
-                  <div className="block_container">
-                    <div id="p1">
-                      <label className="labelText">CNIC </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="cnic"
-                        name="cnic"
-                        placeholder="cnic"
-                      />
-                    </div>
-                    <div id="p3">
-                      <label className="labelText">Address </label>
-                      <input
-                        type="text"
-                        className="textField"
-                        id="address"
-                        name="address"
-                        placeholder="address"
-                      />
-                    </div>
-                    <div id="p3">
-                      <label className="labelText">Gender </label>
-                      <select name="selectGender" id="gender">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">other</option>
-                      </select>
+                  <div className="containerhere">
+                    <div className="last-rowhere">
+                      <div className="div7here">
+                        <label className="labelText">CNIC </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="cnic"
+                          name="cnic"
+                          placeholder="cnic"
+                        />
+                      </div>
+                      <div className="div8here">
+                        <label className="labelText">Address </label>
+                        <input
+                          type="text"
+                          className="textField"
+                          id="address"
+                          name="address"
+                          placeholder="address"
+                        />
+                      </div>
+                      <div className="div9here">
+                        <label className="labelText">Gender </label>
+                        <select name="selectGender" id="gender">
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                          <option value="other">other</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
                   <br></br>
