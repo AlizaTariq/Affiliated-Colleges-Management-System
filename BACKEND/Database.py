@@ -1320,10 +1320,10 @@ class DatabaseModel:
                    
                     Thanks,<br><br>
                     Show Your willingness by replying.<br><br>
-                    <a href="http://localhost:3001/RequestRecieved?pracId={str(examDutyid)}&type=e">
+                    <a href="http://localhost:3001/">
                         <button style="background-color: green; color: white; padding: 10px 20px;">Accepted!</button>
                     </a>
-                      <a href="http://localhost:3001/RequestRecieved?pracId={str(examDutyid)}&type=e">
+                      <a href="http://localhost:3001/">
                         <button style="background-color: red; color: white; padding: 10px 20px;">Rejected!</button>
                     </a>
                     </p>

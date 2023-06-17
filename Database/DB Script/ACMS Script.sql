@@ -320,14 +320,13 @@ ALTER TABLE IF EXISTS public.enrolled_department
 	
 	
 	
-
 -- Table: public.examiner_courses
 
 -- DROP TABLE IF EXISTS public.examiner_courses;
 
 CREATE TABLE IF NOT EXISTS public.examiner_courses
 (
-    examiner_crs_id integer NOT NULL,
+    examiner_crs_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
     examiner_id integer NOT NULL,
     examiner_crs_name text COLLATE pg_catalog."default",
     CONSTRAINT examiner_courses_pkey PRIMARY KEY (examiner_crs_id),
