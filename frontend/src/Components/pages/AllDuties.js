@@ -34,7 +34,39 @@ export default function AllDuties() {
   // Logic to calculate the current items to display based on current page and itemsPerPage
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = duties.slice(indexOfFirstItem, indexOfLastItem);
+  // const currentItems = duties.slice(indexOfFirstItem, indexOfLastItem);
+  const [filteredItems, setFilteredItems] = useState([]);
+  const currentItems =
+    filteredItems.length > 0
+      ? filteredItems
+      : duties.slice(indexOfFirstItem, indexOfLastItem);
+  const searching = (event) => {
+    const searchValue = event.target.value;
+    setSearchValue(searchValue);
+
+    if (searchValue === "") {
+      setFilteredItems([]);
+      return;
+    }
+
+    const filteredItems = duties.filter((item) => {
+      if (
+        item[3].toLowerCase() === searchValue.toLowerCase() ||
+        item[1].toLowerCase() === searchValue.toLowerCase() ||
+        item[4].toString() === searchValue ||
+        item[5].toLowerCase() === searchValue.toLowerCase() ||
+        item[2].toLowerCase() === searchValue.toLowerCase() ||
+        item[0].toString() === searchValue
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    setFilteredItems(filteredItems);
+  };
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -46,22 +78,6 @@ export default function AllDuties() {
     return <Login />; // Render the Login component if access token doesn't exist
   }
 
-  // const modifiedDuties = duties.map((item) => {
-  //   const lastIndex = item.length - 1;
-  //   let status = item[lastIndex];
-  //   if (status === 1) {
-  //     status = "Assigned";
-  //   } else if (status === 2) {
-  //     status = "Not Assigned";
-  //   } else if (status === 3) {
-  //     status = "Rejected";
-  //   }
-  //   item[lastIndex] = status;
-  //   return item;
-  // });
-
-  // // Set the modified duties list in state
-  // setDuties(modifiedDuties);
   const handleOnClickDutyBtn = (event) => {
     console.log("handleOnClickDutyBtn --> ", event.target.value);
 
@@ -81,9 +97,10 @@ export default function AllDuties() {
         <div className="d-flex flex-row-reverse bd-highlight">
           <p className="form-inline">
             <input
+              style={{ marginTop: "5px" }}
               id="searching"
-              className="form-control mr-sm-2 mt-3"
-              onChange={(event) => setSearchValue(event.target.value)}
+              className="form-control mr-sm-2"
+              onChange={(event) => searching(event)}
               type="search"
               placeholder="Search"
             />
@@ -154,59 +171,42 @@ export default function AllDuties() {
             </thead>
             <tbody>
               {currentItems
-                ? currentItems
-                    .filter((item) => {
-                      if (values === "") {
-                        //if query is empty
-                        return item;
-                      } else if (
-                        item[2].toLowerCase().includes(values.toLowerCase())
-                      ) {
-                        //returns filtered array
-                        return item;
-                      } else if (
-                        item[3].toLowerCase().includes(values.toLowerCase())
-                      ) {
-                        //returns filtered array
-                        return item;
-                      }
-                    })
-                    .map((item) => (
-                      <tr
-                        style={{ border: "1px" }}
-                        key={item[0]}
-                        id={item[0]}
-                        onClick={() => {
-                          const responseData = item[0];
-                          navigate("/DutyDetailsEx", {
-                            state: { data: { responseData } },
-                          });
-                        }}
-                      >
-                        <td className="tableText">{item[0]}</td>
-                        <td className="tableText">{item[1]}</td>
-                        <td className="tableText">{item[2]}</td>
-                        <td className="tableText">{item[3]}</td>
-                        <td className="tableText">{item[4]}</td>
-                        <td className="tableText">{item[5]}</td>
-                        <td className="tableText">
-                          {item[6] === 1
-                            ? "Assigned"
-                            : item[6] === 2
-                            ? "Accepted"
-                            : "Rejected"}
-                        </td>
-                        <td className="tableText">
-                          <button
-                            className="showDutyTableBtn"
-                            id={item[0]}
-                            onClick={DutyDetails}
-                          >
-                            Duty Details
-                          </button>
-                        </td>
-                      </tr>
-                    ))
+                ? currentItems.map((item) => (
+                    <tr
+                      style={{ border: "1px" }}
+                      key={item[0]}
+                      id={item[0]}
+                      onClick={() => {
+                        const responseData = item[0];
+                        navigate("/DutyDetailsEx", {
+                          state: { data: { responseData } },
+                        });
+                      }}
+                    >
+                      <td className="tableText">{item[0]}</td>
+                      <td className="tableText">{item[1]}</td>
+                      <td className="tableText">{item[2]}</td>
+                      <td className="tableText">{item[3]}</td>
+                      <td className="tableText">{item[4]}</td>
+                      <td className="tableText">{item[5]}</td>
+                      <td className="tableText">
+                        {item[6] === 1
+                          ? "Assigned"
+                          : item[6] === 2
+                          ? "Accepted"
+                          : "Rejected"}
+                      </td>
+                      <td className="tableText">
+                        <button
+                          className="showDutyTableBtn"
+                          id={item[0]}
+                          onClick={DutyDetails}
+                        >
+                          Duty Details
+                        </button>
+                      </td>
+                    </tr>
+                  ))
                 : "Loading..."}
             </tbody>
           </table>
