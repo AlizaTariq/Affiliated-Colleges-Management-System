@@ -13,12 +13,19 @@ const ExaminerExp = () => {
         'Authorization': `Bearer ${accessToken}`,
     };
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/NewExperience', { headers: header })
-            .then(response => response.json())
-            .then(data => setDataList(data))
-            .catch(error => console.error(error));
+        if (!accessToken) {
+            return navigate("/");
+        }
+        fetchData();
     }, []);
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/NewExperience', { headers: header });
+            setDataList(response.data);
+        } catch (error) {
+        }
+    };
     const [job_title, set_job_title] = useState('');
     const [organization, set_organization] = useState('');
     const [reference_email, set_reference_email] = useState('');
@@ -37,12 +44,14 @@ const ExaminerExp = () => {
         formData.append('ExperianceLetter', fileInputRef.current.files[0]);
         try {
             const response = await axios.post('http://127.0.0.1:5000/ExaminerExperience', formData, { headers: header });
-
+            if (response.data["status"] === "fail") {
+                setError(response.data["message"]);
+            } else {
+                window.location.href = '/ExaminerExp';
+            }
             // Redirect the user to the protected route
-            return navigate('/ExaminerExp');
         } catch (error) {
             console.error("error: ", error);
-            setError('Some Input is Wrong');
         }
     };
     useEffect(() => {
@@ -66,13 +75,13 @@ const ExaminerExp = () => {
             }
         }
     });
-    if (!accessToken) {
-        return navigate("/"); // Render the Login component if access token doesn't exist
+    const GoNext = () => {
+        return navigate("/ExaminerInterest");
     }
     return (
         <div className='FormBgEE'>
             <div className='bg-imgEE'>
-                <div className="contentEE" style={{ width: "522px", height: "83%" }}>
+                <div className="contentEE">
                     <header>
                         <h1 style={{ color: "#d7e7ec", fontFamily: "'Poppins'", fontWeight: "500" }}>Experience</h1>
                     </header>
@@ -80,11 +89,11 @@ const ExaminerExp = () => {
                         <thead>
                             <tr>
                                 <th>Sr #</th>
-                                <th>Degree Title</th>
-                                <th>Institute Name</th>
+                                <th>Job Title</th>
+                                <th>Organization Name</th>
+                                <th>Reference Email</th>
                                 <th>Starting Date</th>
                                 <th>Ending Date</th>
-                                {/* <th className='EditBtnEE'>Edit</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -95,6 +104,7 @@ const ExaminerExp = () => {
                                     <td>{item[3]}</td>
                                     <td>{item[4]}</td>
                                     <td>{item[5]}</td>
+                                    <td>{item[6]}</td>
                                 </tr>
                             ))}
                         </tbody>
@@ -102,9 +112,6 @@ const ExaminerExp = () => {
                     <div className="container ButtonsEE">
                         <div>
                             {/* <form action='http://localhost:3000/Profile'> */}
-                            <div className='NextBtnEE'>
-                                <button type="button" id='myBtn'>Add New</button>
-                            </div>
                             <div id="AddNewQualification" className="modal">
                                 <div className="modal-content">
                                     <span className="close">&times;</span>
@@ -142,20 +149,18 @@ const ExaminerExp = () => {
                                                 <input type="submit" value="Add" />
                                             </div>
                                             <div>
-                                                {error && <div>{error}</div>}
+                                                {error && <div style={{ color: "#cc4444" }}>{error}</div>}
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <a href='http://localhost:3000/'>
-                                <div className='NextBtn NextBtnEE'>
-                                    <button type="submit">Next Page</button>
-                                </div>
-                            </a>
-                        </div>
+                    </div>
+                    <div className='NextBtnEE'>
+                        <button type="button" id='myBtn' style={{ width: "190px" }}>Add New</button>
+                        <br></br>
+                        <button type="submit" style={{ width: "190px" }} onClick={GoNext}>Next Page</button>
                     </div>
                 </div>
             </div>

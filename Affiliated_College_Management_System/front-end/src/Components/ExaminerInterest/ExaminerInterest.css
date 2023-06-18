@@ -1,0 +1,69 @@
+.FormBgEE {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+.bg-imgEE {
+    background-color: #1f2c30;
+    background-size: cover;
+    background-position: center;
+}
+.contentEE {
+    margin-top: 0px;
+    /*10px*/
+    border-radius: 10px;
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    z-index: 999;
+    text-align: center;
+    padding: 20px 12px 165px 12px;
+    width: 40%;
+    color: white;
+    transform: translate(-50%, -50%);
+    background-color: #18292d;
+    background-size: cover;
+    box-shadow: 0 0 40px 20px rgba(0, 0, 0, 0.26);
+}
+.NextBtnEE {
+    text-align: right;
+}
+.NextBtnEE button {
+    height: 50px;
+    background-color: rgb(20, 20, 20);
+    color: white;
+    font-size: medium;
+    font-family: sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid #fff;
+    margin: 14px 60px;
+    height: 50px;
+    font-size: 20px;
+    font-family: poppins;
+}
+.NextBtnEE :hover {
+    background: rgb(20, 20, 20);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.input-box {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #fff;
+    border-style: inset;
+    height: 32px;
+    border-radius: 20px;
+    padding: 0 10px;
+    box-sizing: border-box;
+    outline: none;
+    text-align: center;
+    color: #fff;
+}
+.form-control {
+    background-color: #1f1e1e;
+}
+.option_{
+    margin: 0px 30px 0px 30px;
+}

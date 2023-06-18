@@ -10,15 +10,15 @@ const Home = () => {
     const navigate = useNavigate();
     const accessToken = localStorage.getItem('access_token');
     const headers = {
-      'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
     };
     const handleDutyID = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('duty_id', Duty_ID);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/getRequestRecievedId', formData, {headers});
-            
+            const response = await axios.post('http://127.0.0.1:5000/getRequestRecievedId', formData, { headers: headers });
+
             // Redirect the user to the protected route
             return navigate('/UploadPaper');
         } catch (error) {
@@ -26,14 +26,19 @@ const Home = () => {
         }
     };
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/home')
-            .then(response => response.json())
-            .then(data => setDataList(data))
-            .catch(error => console.error(error));
+        if (!accessToken) {
+            return navigate("/"); // Render the Login component if access token doesn't exist
+        }
+        fetchData();
     }, []);
-    if (!accessToken) {
-      return navigate("/"); // Render the Login component if access token doesn't exist
-    }
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/home', { headers: headers });
+            setDataList(response.data);
+            console.log(response.data);
+        } catch (error) {
+        }
+    };
 
     return (
         <>
@@ -55,7 +60,11 @@ const Home = () => {
                                         <div className='CourseTitle4'>{item[1]}</div>
                                         <div className='papertype4'>
                                             {item[3]}
-                                            <button className='detail-btn' type="deatils" onClick={() => setId(item)}>See Details</button>
+                                            <button className='detail-btn' type="deatils" onClick={() => {
+                                                const id = item[0];
+                                                const type = item[3]
+                                                navigate("/UploadPaper?id=" + id + "&type=" + type);
+                                            }}>See Details</button>
                                         </div>
                                         <div className='date4'>{item[2]}</div>
                                     </div>

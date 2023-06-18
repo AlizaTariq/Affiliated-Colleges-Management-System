@@ -2,7 +2,6 @@ import React from "react";
 import SingleDetailsV2 from "./single-details-v2";
 
 const ExperienceDetails = ({ data }) => {
-  console.log(data);
   return (
     <div className="p-3 ">
       <SingleDetailsV2 heading={"Job Title"} text={data?.job_title} />

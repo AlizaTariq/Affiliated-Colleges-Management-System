@@ -1,16 +1,24 @@
+
+
+
+
+
 .Navbar {
-  height: 75px;
+  height: 95px;
   top: 0%;
-  width: 1500px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #171d1f;
   box-shadow: 10px 10px 100px black;
   padding-bottom: 0px;
   position: fixed;
   z-index: 9999;
+  align-items: center;
 }
+
+/* .logo {
+ 
+} */
 
 .VerNavbar {
   position: fixed;
@@ -18,7 +26,7 @@
   top: 75px;
   left: 0%;
   bottom: 0;
-  width: 230px;
+  width: 18%;
   background-color: #171d1f;
 }
 
@@ -30,12 +38,13 @@
   padding: 30px 10px;
   margin: 8px;
   left: 0%;
+  cursor: pointer;
 }
 
-.vernav a {
+.vernav div {
   display: block;
   padding: 10px;
-  width: 202px;
+  width: 90%;
   color: #DDDBCB;
   text-decoration: none;
   font-size: 22px;
@@ -49,12 +58,12 @@
   margin: 8px;
 }
 
-.vernav a:hover {
+.vernav div:hover {
   opacity: 1;
   background: #0a0a0a;
 }
 
-.vernav a::before {
+.vernav div::before {
   content: "";
   position: absolute;
   left: 0;
@@ -65,11 +74,11 @@
   transition: all .45s ease;
 }
 
-.vernav a:hover::before {
+.vernav div:hover::before {
   width: 100%;
 }
 
-.vernav a.active {
+.vernav div.active {
   background-color: #ddd;
   color: #333;
 }
@@ -91,10 +100,11 @@
 .nav-items form .maindiv {
   display: flex;
   align-items: center;
-  gap: 10px; /* Added gap between input and button */
+  gap: 10px;
+  /* Added gap between input and button */
 }
 
-.nav-items a {
+.nav-items div {
   color: #DDDBCB;
   text-decoration: none;
   font-size: 20px;
@@ -107,13 +117,13 @@
   border-radius: 5px;
 }
 
-.nav-items a:hover {
+.nav-items div:hover {
   opacity: 1;
-  background: #0a0a0a;
+  /* background: #0a0a0a; */
 }
 
 
-.nav-items a::before {
+.nav-items div::before {
   content: "";
   position: absolute;
   left: 0;
@@ -124,11 +134,11 @@
   transition: all .45s ease;
 }
 
-.nav-items a:hover::before {
+.nav-items div:hover::before {
   width: 100%;
 }
 
-.header-btn a {
+.header-btn label {
   padding: 8px 12px;
   color: #DDDBCB;
   font-size: 20px;
@@ -137,36 +147,43 @@
   margin: 20px;
 }
 
-.header-btn .progap {
+.header-btn .profile {
   position: relative;
   /* Add a relative position to the link container */
   background: #0a0a0a;
   border: 1px solid rgb(131, 127, 127);
   border-radius: 50px;
   transition: all .50s ease;
-  margin: 5px;
+  margin: 20px;
   /* padding: 15px 12px; */
   padding-top: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  width: 25%;
   transition: all .8s ease;
+
+  padding-right: 30px;
+  padding-left: 30px;
+  /* width: 150px; */
+  cursor: pointer;
 }
 
-.header-btn .progap:hover {
+.header-btn .profile:hover {
   background: #DDDBCB;
-  /* border-radius: 40%; */
-  padding-top: 25px;
-  margin-bottom: 55px;
-  padding-right: 45px;
-  padding-left: 45px;
-  border:1px solid #0a0a0a;
+  border-radius: 30%;
+  padding-top: 15px;
+  margin-bottom: 5px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border: 3px solid #0a0a0a;
+  cursor: pointer;
 }
 
-.header-btn .progap:hover box-icon {
+.header-btn .profile:hover box-icon {
   display: none;
   /* Hide the box-icon on hover */
 }
 
-.header-btn .progap:nth-child(1):hover::before {
+.header-btn .profile:nth-child(1):hover::before {
   content: "Profile";
   position: absolute;
   top: 50%;
@@ -179,7 +196,7 @@
   opacity: 0.9;
 }
 
-.header-btn .progap:nth-child(2):hover::before {
+/* .header-btn .progap:nth-child(2):hover::before {
   content: "Recent";
   position: absolute;
   top: 50%;
@@ -190,9 +207,58 @@
   font-family: poppin serif;
   color: #0a0a0a;
   opacity: 0.9;
+} */
+
+
+.header-btn .profile label {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  font-family: poppin serif;
 }
 
-.header-btn .progap:nth-child(3):hover::before {
+.header-btn .profile label:hover {
+  text-decoration: none;
+}
+
+
+.header-btn .settings {
+  position: relative;
+  /* Add a relative position to the link container */
+  background: #0a0a0a;
+  border: 1px solid rgb(131, 127, 127);
+  border-radius: 50px;
+  transition: all .50s ease;
+  margin: 20px;
+  /* padding: 15px 12px; */
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 25%;
+  transition: all .8s ease;
+
+  padding-right: 30px;
+  padding-left: 30px;
+  cursor: pointer;
+}
+
+.header-btn .settings:hover {
+  background: #DDDBCB;
+  border-radius: 30%;
+  padding-top: 15px;
+  margin-bottom: 5px;
+  padding-right: 50px;
+  padding-left: 50px;
+  border: 3px solid #0a0a0a;
+  cursor: pointer;
+}
+
+.header-btn .settings:hover box-icon {
+  display: none;
+  /* Hide the box-icon on hover */
+}
+
+.header-btn .settings:nth-child(1):hover::before {
   content: "Settings";
   position: absolute;
   top: 50%;
@@ -205,7 +271,7 @@
   opacity: 0.9;
 }
 
-.header-btn .progap a {
+.header-btn .settings label {
   color: #ffffff;
   text-decoration: none;
   font-size: 20px;
@@ -213,7 +279,7 @@
   font-family: poppin serif;
 }
 
-.header-btn .progap a:hover {
+.header-btn .settings label:hover {
   text-decoration: none;
 }
 
@@ -224,8 +290,9 @@
   transition: all .50s ease;
   max-height: 500px;
   box-shadow: 2px 2px 0 0 #11161b, 4px 4px 0 0 white;
-  margin-right: 160px;
   text-decoration: none;
+  width: 60%;
+  cursor: pointer;
 }
 
 .header-btn .signlog:hover {
@@ -233,6 +300,7 @@
   border: 1px solid white;
   box-shadow: 3px 3px #11161b, 6px 6px 0 0 #DDDBCB;
   transform: translate(-3px, -3px);
+  cursor: pointer;
 }
 
 .btnsubmit {
@@ -243,7 +311,8 @@
   background: #0a0a0a;
   cursor: pointer;
   margin: 5px;
-  margin-bottom: 10px; /* Added bottom margin */
+  margin-bottom: 10px;
+  /* Added bottom margin */
 }
 
 .inputsearch {
@@ -258,7 +327,8 @@
   max-width: 400px;
   background: rgba(225, 225, 225, 0.2);
   margin-bottom: 10px;
-  margin-right: 10px; /* Reduced the right margin */
+  margin-right: 10px;
+  /* Reduced the right margin */
 }
 
 ::placeholder {

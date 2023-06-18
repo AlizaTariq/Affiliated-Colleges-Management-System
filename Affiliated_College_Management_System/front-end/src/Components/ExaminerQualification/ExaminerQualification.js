@@ -11,27 +11,18 @@ const ExaminerQualification = () => {
     const header = {
         'Authorization': `Bearer ${accessToken}`,
     };
-    // useEffect(() => {
-    //     if (accessToken) {
-    //         console.log("yess")
-    //         fetch('http://127.0.0.1:5000/NewQualifications', { headers: header })
-    //             .then(response => response.json())
-    //             .then(data => setDataList(data))
-    //             .catch(error => console.log(error));
-    //     }
-    // }, []);
-
     useEffect(() => {
+        if (!accessToken) {
+            return navigate("/"); // Render the Login component if access token doesn't exist
+        }
         fetchData();
-    }, []); 
+    }, []);
 
     const fetchData = async () => {
         try {
             const response = await axios.get('http://127.0.0.1:5000/NewQualifications', { headers: header });
             setDataList(response.data);
-            console.log(response.data);
         } catch (error) {
-            
         }
     };
     const [degree_title, setDegreeTitle] = useState('');
@@ -50,9 +41,12 @@ const ExaminerQualification = () => {
         formData.append('transcript', fileInputRef.current.files[0]);
         try {
             const response = await axios.post('http://127.0.0.1:5000/ExaminerQualification', formData, { headers: header });
-
+            if (response.data["status"] === "fail") {
+                setError(response.data["message"]);
+            } else {                
+                window.location.href = '/ExaminerQualification';
+            }
             // Redirect the user to the protected route
-            return navigate('/ExaminerQualification');
         } catch (error) {
             console.error("error: ", error);
             setError('Some Input is Wrong');
@@ -77,13 +71,13 @@ const ExaminerQualification = () => {
         }
 
     });
-    if (!accessToken) {
-        return navigate("/"); // Render the Login component if access token doesn't exist
+    const GoNext = () => {
+        return navigate("/ExaminerExp");
     }
     return (
         <div className='FormBgEQ'>
             <div className='bg-imgEQ'>
-                <div className="contentEQ" style={{ width: "522px", height: "87%" }}>
+                <div className="contentEQ" >
                     <header>
                         <h1 style={{ color: "#d7e7ec", fontFamily: "'Poppins'", fontWeight: "500" }}>Qualification</h1>
                     </header>
@@ -111,9 +105,6 @@ const ExaminerQualification = () => {
                     </table>
                     <div className="container ButtonsEQ">
                         <div>
-                            <div className='NextBtnEQ'>
-                                <button type="button" id='myBtn'>Add New</button>
-                            </div>
                             <div id="AddNewQualification" className="modal">
                                 <div className="modal-content" style={{ backgroundColor: "#232323" }}>
                                     <span className="close">&times;</span>
@@ -147,18 +138,18 @@ const ExaminerQualification = () => {
                                                 <input type="submit" value="Add" />
                                             </div>
                                             <div>
-                                                {error && <div>{error}</div>}
+                                                {error && <div style={{color:"#cc4444"}}>{error}</div>}
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div className='NextBtnEQ'>
-                            <a href="http://localhost:3000/ExaminerExp">
-                                <button type="submit">Next Page</button>
-                            </a>
-                        </div>
+                    </div>
+                    <div className='NextBtnEE'>
+                        <button type="button" id='myBtn' style={{ width: "190px" }}>Add New</button>
+                        <br></br>
+                        <button type="submit" style={{ width: "190px" }} onClick={GoNext}>Next Page</button>
                     </div>
                 </div>
             </div>

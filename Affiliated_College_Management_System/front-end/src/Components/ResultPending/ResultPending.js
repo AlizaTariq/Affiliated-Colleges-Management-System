@@ -17,7 +17,7 @@ const ResultPending = () => {
         const formData = new FormData();
         formData.append('duty_id', Duty_ID);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/getRequestRecievedId', formData, {headers});
+            const response = await axios.post('http://127.0.0.1:5000/getRequestRecievedId', formData, { headers: headers });
             
             // Redirect the user to the protected route
            return navigate('/UploadResult');
@@ -26,14 +26,20 @@ const ResultPending = () => {
         }
     };
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/ResultUploadPending')
-            .then(response => response.json())
-            .then(data => setDataList(data))
-            .catch(error => console.error(error));
-    }, []);
-    if (!accessToken) {
-      return navigate("/"); // Render the Login component if access token doesn't exist
-    }
+        if (!accessToken) {
+          return navigate("/"); // Render the Login component if access token doesn't exist
+        }
+        fetchData();
+    }, []); 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:5000/ResultUploadPending', { headers: headers });
+            setDataList(response.data);
+            console.log(response.data);
+        } catch (error) {
+            
+        }
+    };
     return (
         <>
         <Navbar></Navbar>
@@ -57,7 +63,11 @@ const ResultPending = () => {
                                     <div className='CourseTitle4'>{item[1]}</div>
                                     <div className='papertype4'>
                                         {item[3]}
-                                        <button className='detail-btn' type="deatils" onClick={() => setId(item)}>See Details</button>
+                                        <button className='detail-btn' type="deatils" onClick={() => {
+                                                const id = item[0];
+                                                const type = item[3]
+                                                navigate("/UploadResult?id=" + id + "&type=" + type);
+                                            }}>See Details</button>
                                     </div>
                                     <div className='date4'>{item[2]}</div>
                                 </div>

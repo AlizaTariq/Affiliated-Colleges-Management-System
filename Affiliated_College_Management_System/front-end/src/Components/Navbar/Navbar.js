@@ -1,14 +1,41 @@
 import React from 'react'
 import 'boxicons'
+import { useNavigate } from 'react-router-dom';
 import "./navbar.css";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const GoHome = () => {
+    return navigate("/Home");
+  }
+  const GoNotifications = () => {
+    return navigate("/Notifications");
+  }
+  const GoDuePaper = () => {
+    return navigate("/DuePaper");
+  }
+  const GoResultPending = () => {
+    return navigate("/ResultPending");
+  }
+     
+  const GoProfile = () => {
+    return navigate("/Profile");
+  }
+  const GoSettings = () => {
+    return navigate("/Settings");
+  }
+  const LogOut = () => {
+    localStorage.removeItem("access_token")
+    return navigate("/");
+  }
+
   return (
     <div className='Navbar'>
-      <div className="col-3">
-        <a href="/Home" className='nav-logo'><box-icon type='logo' name='edge' animation='tada' color='#DDDBCB' size='45px'></box-icon>xaminer Portal</a>
+      <div className="logo" style={{ width: "25%"}}>
+        <div onClick={GoHome} className='nav-logo'><box-icon type='logo' name='edge' animation='tada' color='#DDDBCB' size='45px'></box-icon>xaminer Portal</div>
       </div>
-      <div className='nav-items col-4'>
+      <div className='nav-items' style={{ width: "30%"}}>
         <form action="post">
           <div className="maindiv">
             <input type="text" className="inputsearch" name='q' placeholder='Search' required />
@@ -16,20 +43,23 @@ const Navbar = () => {
           </div>
         </form>
       </div>
-      <div className='header-btn' style={{ "textAlign": "end" }}>
-        <a href="/Profile" className='progap'><box-icon name='user-circle' size='30px' color="#DDDBCB"></box-icon></a>
-        <a href="/Recent" className='progap'><box-icon type='solid' name='bell-ring' animation='tada' size='30px' color="#DDDBCB"></box-icon></a>
-        <a href="/Settings" className='progap'><box-icon name='cog' animation='spin' size='30px' color="#DDDBCB"></box-icon></a>
+      <div className='header-btn' style={{ width:"10%" }}>
+        <label onClick={GoProfile} className='profile'><box-icon name='user-circle' size='30px' color="#DDDBCB"></box-icon></label>
+        {/* <label onClick={GoRecent} className='progap'><box-icon type='solid' name='bell-ring' animation='tada' size='30px' color="#DDDBCB"></box-icon></label> */}
+        {/* <label onClick={GoSettings} className='progap'><box-icon name='cog' animation='spin' size='30px' color="#DDDBCB"></box-icon></label> */}
       </div>
-      <div className='header-btn' style={{ "textAlign": "end" }}>
-        <a href="/SignupPersonalInfo" className='signlog'><box-icon name='log-out' size='22px' color="#DDDBCB"></box-icon>Log Out</a>
+      <div className='header-btn' style={{ width:"20%" }}>
+        <label onClick={GoSettings} className='settings'><box-icon name='cog' animation='spin' size='30px' color="#DDDBCB"></box-icon></label>
+      </div>
+      <div className='header-btn' style={{ width : "15%" }}>
+        <label onClick={LogOut} className='signlog'><box-icon name='log-out' size='22px' color="#DDDBCB"></box-icon>Log Out</label>
       </div>
       <div className='VerNavbar'>
         <div className='vernav'>
-          <a href="/Home">Home</a>
-          <a href="/Notifications">Requests</a>
-          <a href="/DuePaper">Due Paper</a>
-          <a href="ResultPending">Result Pending</a>
+          <div onClick={GoHome}>Home</div>
+          <div onClick={GoNotifications}>Requests</div>
+          <div onClick={GoDuePaper}>Due Paper</div>
+          <div onClick={GoResultPending}>Result Pending</div>
         </div>
       </div>
     </div>

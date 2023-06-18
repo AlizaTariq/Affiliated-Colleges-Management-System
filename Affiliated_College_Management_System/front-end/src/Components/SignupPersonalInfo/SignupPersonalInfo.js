@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './signupPersonalInfo.css';
-import { decodeToken } from "react-jwt";
 import { useNavigate } from 'react-router-dom';
+import './signupPersonalInfo.css';
 
 const SignupPersonalInfo = () => {
     const [usr_name, setUserName] = useState('');
@@ -20,19 +19,19 @@ const SignupPersonalInfo = () => {
         console.log("usr_address: ", usr_address);
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:5000/SignUpPersonalInfo', 
+            const response = await axios.post('http://127.0.0.1:5000/SignUpPersonalInfo',
                 { usr_name, usr_cnic, usr_email, usr_address, usr_bio, usr_gender, usr_password, usr_phone });
 
-            const accessToken = response.data.access_token;
-            localStorage.setItem('access_token', accessToken);
-           
-            // Redirect the user to the protected route
-            return navigate("/SignupExaminerInfo")
-            // window.location.href = '/SignupExaminerInfo';
+            if (response.data["status"] === "fail") {
+                setError(response.data["message"]);
+            } else {
+                const accessToken = response.data.access_token;
+                localStorage.setItem('access_token', accessToken);
+                navigate("/SignupExaminerInfo")
+            }
         } catch (error) {
-            // document.getElementById("msj").textContent = error;
             console.error("error: ", error);
-            setError('Email Exists');
+            setError(error);
         }
     };
 
@@ -67,11 +66,11 @@ const SignupPersonalInfo = () => {
                         </div>
                         <div className="maindivSP">
                             <span className="fa fa-id-card"></span>
-                            <input type="text" className="input-boxSP" placeholder='Enter CNIC' name='cnic' onChange={(e) => setCNIC(e.target.value)} required />
+                            <input type="text" className="input-boxSP" placeholder='Enter CNIC (00000-0000000-0)' name='cnic' onChange={(e) => setCNIC(e.target.value)} required />
                         </div>
                         <div className="maindivSP">
                             <span className="fa fa-id-card"></span>
-                            <input type="text" className="input-boxSP" placeholder='Enter Phone Number' name='phone' onChange={(e) => setPhone(e.target.value)} required />
+                            <input type="text" className="input-boxSP" placeholder='Enter Phone Number (+92 0000000000)' name='phone' onChange={(e) => setPhone(e.target.value)} required />
                         </div>
                         <div className="maindivSP">
                             <span className="fa fa-home"></span>
@@ -81,8 +80,10 @@ const SignupPersonalInfo = () => {
                             <span className="fa fa-male"></span>
                             <span style={{ width: "fit-content" }} className="input-boxSP" > Gender: </span>
                             <select className="form-label designLable" name="gender" onChange={(e) => setGender(e.target.value)} >
+                                <option value="Select">Select</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
+                                <option value="Not prefer to say">Not prefer to say</option>
                             </select>
                         </div>
                         <div className="maindivSP">
@@ -102,7 +103,7 @@ const SignupPersonalInfo = () => {
                             <button type="submit" className="submit-btnSP" >Next</button>
                         </div>
                         <div>
-                            {error && <div>{error}</div>}
+                            {error && <div style={{color:"#cc4444"}}>{error}</div>}
                         </div>
                     </form>
                     <div className="passSP">

@@ -15,6 +15,7 @@ import UploadResult from './Components/UploadResult/UploadResult';
 import ExaminerExp from './Components/ExaminerExp/ExaminerExp';
 import ExaminerQualification from './Components/ExaminerQualification/ExaminerQualification';
 import Profile from './Components/Profile/Profile';
+import ExaminerInterest from './Components/ExaminerInterest/ExaminerInterest';
 import AcceptedRequest from './Components/AcceptedRequest/AcceptedRequest';
 import 'boxicons';
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="/UploadResult" element={<UploadResult />} />
           <Route path="/Settings" element={<Settings />} />
           <Route path="/AcceptedRequest" element={<AcceptedRequest />} />
+          <Route path="/ExaminerInterest" element={<ExaminerInterest />} />
         </Routes >
       </Router>
     </div>

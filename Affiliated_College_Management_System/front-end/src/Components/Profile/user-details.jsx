@@ -11,14 +11,14 @@ const data = [
 const UserDetails = ({ data }) => {
   return (
     <div className="p-3 ">
-      <SingleDetails heading={"Full Name"} text={data?.name} />
-      <SingleDetails heading={"cnic"} text={data?.cnic} />
-      <SingleDetails heading={"Phone #"} text={data?.phone} />
-      <SingleDetails heading={"Address"} text={data?.address} />
-      <SingleDetails heading={"Email"} text={data?.email} />
-      <SingleDetails heading={"Gender"} text={data?.gender} />
+      <SingleDetails heading={"Full Name"} text={data?.usr_name} />
+      <SingleDetails heading={"cnic"} text={data?.usr_cnic} />
+      <SingleDetails heading={"Phone #"} text={data?.usr_phoneno} />
+      <SingleDetails heading={"Address"} text={data?.usr_address} />
+      <SingleDetails heading={"Email"} text={data?.usr_email} />
+      <SingleDetails heading={"Gender"} text={data?.usr_gender} />
       <SingleDetails heading={"Institution"} text={data?.institution} />
-      <SingleDetails heading={"Bio"} text={data?.bio} />
+      <SingleDetails heading={"Bio"} text={data?.usr_bio} />
       <SingleDetails heading={"Ranking"} text={data?.ranking} />
       <SingleDetails
         heading={"Acceptance Count"}

@@ -1,10 +1,12 @@
 import React from "react";
-
+// import abc from "../../../../Back-End/Static/ProfilePics/empty.png";
 const Avatar = ({ src, name }) => {
+  const imagePath = "D:/FYP/Final code/Affiliated_College_Management_System/front-end/src/Static/ProfilePics/empty.png";
   return (
     <div className="bg-white w-full p-md-5 p-2 card">
       <img
-        src={src ?? "/user-placeholder.jpg"}
+        // src={"/assets/images/user-placeholder.jpg"}
+        src={imagePath}
         alt={name}
         width={200}
         height={200}

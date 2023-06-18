@@ -4,7 +4,7 @@ const Avatar = ({ src, name }) => {
   return (
     <div className="bg-white w-full p-md-5 p-2 card">
       <img
-        src={src ?? "/user-placeholder.jpg"}
+        src="../../Static/ProfilePics/empty.png"
         alt={name}
         width={200}
         height={200}
