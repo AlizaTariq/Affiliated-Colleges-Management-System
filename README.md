@@ -29,8 +29,10 @@
     5. **To import data in your database follow the following commands:**
     
           1.  Go to pgAdimn -> File -> Preferences -> Path -> Binary paths.
-          2.  From PostgreSQL Binary Path select your version (like PostgreSQL 15).
-          3.  Click on tables in following sequence :
+          2.  From PostgreSQL Binary Path select your version (like PostgreSQL 15) and add your path to bin
+             of your PostgreSQL (like E:\PostgreSQL\15\bin).
+          3. Select Encoding UTF8.
+          4.  Click on tables in following sequence :
               
                 Tables List
                 1. users
@@ -51,8 +53,8 @@
                 
                 Click on Import/Export Data and select Import.
                 
-          6. In Filename select the path of the CSV file of that table provided in Database/CSV Data.
-          7. From Options enable header.
-          8. Finally click on OK.
+          5. In Filename select the path of the CSV file of that table provided in Database/CSV Data.
+          6. From Options enable header.
+          7. Finally click on OK.
 
 *****************************************************************************************************************************
