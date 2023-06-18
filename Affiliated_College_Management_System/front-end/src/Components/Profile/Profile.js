@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../Navbar/Navbar";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../Navbar/Navbar';
+
 import Avatar from "./avatar";
 import ExperienceDetails from "./experience-details";
 import QualificationDetails from "./qualification-details";
 import UserDetails from "./user-details";
-import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import QuaTable from "./Qua_table";
+
+import axios from 'axios';
+import QuaTable from './Qua_table';
 import ExpTable from "./Exp_table";
-import "./profile.css"
+import { useNavigate } from 'react-router-dom';
+
 
 const Profile = () => {
   const [userDetails, setUserDetails] = useState({});
@@ -27,7 +29,6 @@ const Profile = () => {
       const response = await axios.get('http://127.0.0.1:5001/profile', { headers: headers });
       setUserDetails(response.data)
     } catch (error) {
-      // document.getElementById("msj").textContent = error;
       console.error(error);
       setError("Error loading data");
     }
@@ -55,13 +56,17 @@ const Profile = () => {
       return navigate("/");
     }
   }, []);
+  
+  if (!accessToken) {
+    return navigate("/"); // Render the Login component if access token doesn't exist
+  }
 
   return (
-    < >
-      <Navbar></Navbar>
-      <div className="container py-5 profile_container">
+    <>
+      <Navbar />
+      <div className="container py-5">
         <div className="row">
-          <div className="col-lg-3 col-md-6">
+          <div className="col-lg-3 col-lg-6 mt-5">
             <Avatar
               src={userDetails?.personal_details?.usr_profile_pic}
               name={userDetails?.personal_details?.usr_name}
@@ -142,9 +147,3 @@ const Profile = () => {
 };
 
 export default Profile;
-
-{
-  /* <QualificationDetails
-                    data={userDetails?.qualification_details}
-  />*/
-}
