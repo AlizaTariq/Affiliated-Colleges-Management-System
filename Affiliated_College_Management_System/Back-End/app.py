@@ -314,16 +314,16 @@ def ExaminerLogin():
         # Verification
         m = g.model
         examiner_id = m.getExaminerID(m.getUserID(email))
-        if not (m.checkExaminerVerified(examiner_id)):
-            return jsonify({"status": "fail", "message": "Verify email first"})
+        # if not (m.checkExaminerVerified(examiner_id)):
+        #     return jsonify({"status": "fail", "message": "Verify email first"})
 
         if not (m.checkEmailExist(email)):
             return jsonify({"status": "fail", "message": "Email does not exist"})
 
         usr_pass = m.getUserPassword(email)
+
         if not (check_password_hash(usr_pass, password)):
             return jsonify({"status": "fail", "message": "Invalid Password"})
-
         examiner_id = m.ValidatePassword(email, usr_pass)
         if (examiner_id > 0):
             access_token = create_access_token(identity=m.getUserID(email), expires_delta=timedelta(hours=24))
@@ -647,6 +647,7 @@ def UpdateExaminer():
             if Path(profile).is_file():
                 os.remove(profile)
             p.save(profile) 
+            m.updateProfile(user_id, profile)
 
         f = request.files.get("resume")
         if f != None:
@@ -666,7 +667,7 @@ def UpdateExaminer():
         if usr_cnic != user_[1] and not is_cnic_number_present(usr_cnic):
             return jsonify({"status": "fail", "message": "CNIC is not valid"})
 
-        if not m.updateUser(user_id, usr_name, usr_cnic, usr_email, usr_address, usr_bio, usr_gender, usr_phone, usr_active_status, profile):
+        if not m.updateUser(user_id, usr_name, usr_cnic, usr_email, usr_address, usr_bio, usr_gender, usr_phone, usr_active_status):
                 return jsonify({"status": "fail", "message": "Data has not updated try again."})
 
         return jsonify({"status": "success", "message": "Data Updated"})
