@@ -6,6 +6,8 @@
     #01263a,
     black
   );
+
+  min-height:100vh;
 }
 .ntfButton {
   background-color: teal;

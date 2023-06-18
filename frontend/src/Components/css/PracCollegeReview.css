@@ -1,3 +1,6 @@
+body{
+  min-height:100vh;
+}
 .collegeReviewDetail {
   background-color: teal;
 }

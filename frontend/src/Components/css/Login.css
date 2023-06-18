@@ -15,11 +15,6 @@
 .myLoginBtn:hover {
   background-position: right;
 }
-
-.container {
-  height: 650px;
-}
-
 .pic {
   width: 25%;
 }
