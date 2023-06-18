@@ -372,7 +372,7 @@ class model:
         try:
             if self.connection:
                 cursor = self.connection.cursor()
-                query = '''SELECT usr_name, usr_cnic, usr_phoneno, usr_address, usr_email, usr_gender,usr_bio, usr_profile_pic,usr_active_status FROM public.user where usr_id = %s;'''
+                query = '''SELECT usr_name, usr_cnic, usr_phoneno, usr_address, usr_email, usr_gender,usr_bio, usr_profile_pic,usr_active_status FROM public.users where usr_id = %s;'''
                 cursor.execute(query,(usr_id,))
                 data = cursor.fetchall()
                 return data[0]
@@ -745,7 +745,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = f'''update public.user set usr_name = '{usr_name}', usr_cnic = '{usr_cnic}', usr_email = '{usr_email}',
+                query = f'''update public.users set usr_name = '{usr_name}', usr_cnic = '{usr_cnic}', usr_email = '{usr_email}',
                             usr_address = '{usr_address}', usr_bio = '{usr_bio}', usr_gender = '{usr_gender}', usr_phoneno = '{usr_phone}', 
                             usr_active_status = {usr_active_status}, usr_profile_pic = '{profile}' 
                             where usr_id = {user_id};

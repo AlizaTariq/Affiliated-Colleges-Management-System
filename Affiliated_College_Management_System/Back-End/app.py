@@ -78,7 +78,7 @@ def essentials(func):
             if request.headers.get('authorization') and get_jwt_identity() != None:
                 g.user_id = get_jwt_identity()
                 g.examiner_id = g.model.getExaminerID(g.user_id)
-                
+                print(g.examiner_id)
             api_result = func(*args, **kwargs)
             # close connections
             g.model.__del__()
@@ -116,7 +116,7 @@ def SignUpPersonalInfo():
             return jsonify({"status": "fail", "message": "CNIC is not valid"})
 
         # set data in obj
-        data = User(usr_name, usr_password, usr_phone, usr_cnic, usr_profile_pic, usr_address,
+        data = User(usr_name, _hashed_password, usr_phone, usr_cnic, usr_profile_pic, usr_address,
                usr_email, usr_active_status, usr_bio, usr_gender)
         
         # Insertion in database

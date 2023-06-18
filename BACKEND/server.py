@@ -203,6 +203,7 @@ def sendMailPracDuty(mydata,pracId):
         college=mydata['college']
         dept=mydata['deptValue']
         courseInfo=mydata['courseValue']
+        print(pracId)
         html_content = f"""\
                 <html>
                 <body>
@@ -215,12 +216,9 @@ def sendMailPracDuty(mydata,pracId):
                     
                         Thanks,<br><br>
                         Show Your willingness by replying.<br><br>
-                        <a href="http://localhost:3001/">
-                            <button style="background-color: green; color: white; padding: 10px 20px;">Accepted!</button>
-                        </a>
-                        <a href="http://localhost:3001/">
-                            <button style="background-color: red; color: white; padding: 10px 20px;">Rejected!</button>
-                        </a>
+                        <a href="http://localhost:3001/RequestRecieved?id={pracId[0]}&type=Practical_Exam">
+                            <button style="background-color: green; color: white; padding: 10px 20px;">View Details</button>
+                        </a>                        
                         </p>
                     </body>
                 </html>
