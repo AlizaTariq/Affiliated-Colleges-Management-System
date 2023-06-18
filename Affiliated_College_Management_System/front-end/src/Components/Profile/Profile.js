@@ -24,7 +24,7 @@ const Profile = () => {
   const getUserDetails = async () => {
     try {
       console.log("in try");
-      const response = await axios.get('http://127.0.0.1:5000/profile', { headers: headers });
+      const response = await axios.get('http://127.0.0.1:5001/profile', { headers: headers });
       setUserDetails(response.data)
     } catch (error) {
       // document.getElementById("msj").textContent = error;
@@ -34,14 +34,14 @@ const Profile = () => {
   };
   const getQualifications = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/NewQualifications', { headers: headers });
+      const response = await axios.get('http://127.0.0.1:5001/NewQualifications', { headers: headers });
       setQualificationsList(response.data);
     } catch (error) {
     }
   };
   const getExperience = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/NewExperience', { headers: headers });
+      const response = await axios.get('http://127.0.0.1:5001/NewExperience', { headers: headers });
       setExperienceList(response.data);
     } catch (error) {
     }
@@ -71,12 +71,13 @@ const Profile = () => {
             <h2 className="mb-4 mt-4 mt-md-0">User Details</h2>
             <div className="card mb-4">
               <UserDetails data={userDetails?.personal_details} />
-            </div>
-            <div className="row">
+            </div>            
+          </div>
+          <div className="row">
               <div className="col-12">
                 <h2 className="mb-4">Qualification Details</h2>
                 <div className="card">
-                  <table className='TableStyleEQ' border="1">
+                  <table className='TableStyle' border="1">
                     <thead>
                       <tr>
                         <th>Sr #</th>
@@ -105,7 +106,7 @@ const Profile = () => {
               <div className="col-12">
                 <h2 className="mb-4 mt-4 mt-md-0">Experience Details</h2>
                 <div className="card">
-                  <table className='TableStyleEQ' border="1">
+                  <table className='TableStyle' border="1">
                     <thead>
                       <tr>
                         <th>Sr #</th>
@@ -134,7 +135,6 @@ const Profile = () => {
                 </div>
               </div>
             </div>
-          </div>
         </div>
       </div>
     </>

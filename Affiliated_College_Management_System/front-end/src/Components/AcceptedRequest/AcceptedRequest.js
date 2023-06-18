@@ -25,7 +25,7 @@ const AcceptedRequest = () => {
             return navigate('/?redirectto=' + encodeURIComponent(url));
         }
         axios
-            .get("http://127.0.0.1:5000/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
+            .get("http://127.0.0.1:5001/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
             .then((res) => {
                 const resData = res.data;
                 console.log(resData)

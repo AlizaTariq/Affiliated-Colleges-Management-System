@@ -18,7 +18,7 @@ const Login = () => {
         e.preventDefault();
         try {
             console.log(email, password)
-            const response = await axios.post('http://127.0.0.1:5000/ExaminerLogin', { email, password });
+            const response = await axios.post('http://127.0.0.1:5001/ExaminerLogin', { email, password });
             if (response.data["status"] === "fail") {
                 setError(response.data["message"]);
                 return;

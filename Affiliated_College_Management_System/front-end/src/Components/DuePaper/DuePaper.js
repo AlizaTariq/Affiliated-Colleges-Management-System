@@ -17,7 +17,7 @@ const DuePaper = () => {
         const formData = new FormData();
         formData.append('duty_id', Duty_ID);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/getRequestRecievedId', formData, { headers: headers });
+            const response = await axios.post('http://127.0.0.1:5001/getRequestRecievedId', formData, { headers: headers });
 
             // Redirect the user to the protected route
             return navigate('/AcceptedRequest');
@@ -33,7 +33,7 @@ const DuePaper = () => {
     }, []);
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/PaperPendingDuty', { headers: headers });
+            const response = await axios.get('http://127.0.0.1:5001/PaperPendingDuty', { headers: headers });
             setDataList(response.data);
         } catch (error) {
 

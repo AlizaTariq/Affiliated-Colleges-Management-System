@@ -2,6 +2,36 @@
     margin-left: 18%;
     width: 82%;
     background: #1f2c30;
-    color : white;
+    color: white;
     margin-top: 7%;
+}
+
+.TableStyle {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.TableStyle th,
+.TableStyle td {
+    text-align: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    color: black;
+}
+
+.TableStyle th {
+    background-color: #171d1f;
+    color: #fff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.TableStyle tr:nth-child(even) {
+    background-color: transparent;
+}
+
+.TableStyle tr:hover {
+    background-color: rgb(46, 45, 45);
 }

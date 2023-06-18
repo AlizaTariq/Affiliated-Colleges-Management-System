@@ -19,10 +19,12 @@ function Settings() {
   const [errorP, setErrorP] = useState('');
 
   const [dataList, setDataList] = useState([]);
+  const [QualList, setQualifList] = useState([]);
   const [selectedOption, setSelectedOption] = useState('');
   const [errorI, setErrorI] = useState('');
   const [textInput, setTextInput] = useState('');
   const [userDetails, setUserDetails] = useState({});
+  const [ExpList, setExpList] = useState({});
 
   const navigate = useNavigate();
 
@@ -45,24 +47,123 @@ function Settings() {
     console.log(formData['resume']);
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/UpdateExaminer', formData , { headers: headers });
-        setErrorP(response.data["message"]);
+      const response = await axios.post('http://127.0.0.1:5001/UpdateExaminer', formData, { headers: headers });
+      setErrorP(response.data["message"]);
     } catch (error) {
       console.error("error: ", error);
     }
   };
-  
+  // const [degree_title, setDegreeTitle] = useState('');
+  // const [institution, setInstitution] = useState('');
+  // const [Qstarting_date, setStartingDate] = useState('');
+  // const [Qending_date, setEndingDate] = useState('');
+  // const Transcript = useRef(null);
+  const [error, setError] = useState('');
+  // const handleExaminerQualification = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('degree_title', degree_title);
+  //   formData.append('institution', institution);
+  //   formData.append('starting_date', Qstarting_date);
+  //   formData.append('ending_date', Qending_date);
+  //   formData.append('transcript', Transcript.current.files[0]);
+  //   try {
+  //     const response = await axios.post('http://127.0.0.1:5001/ExaminerQualification', formData, { headers: headers });
+  //     if (response.data["status"] === "fail") {
+  //       setError(response.data["message"]);
+  //     } else {
+  //       window.location.href = '/Settings';
+  //     }
+  //     // Redirect the user to the protected route
+  //   } catch (error) {
+  //   }
+  // };
+  // const [job_title, set_job_title] = useState('');
+  // const [organization, set_organization] = useState('');
+  // const [reference_email, set_reference_email] = useState('');
+  // const [starting_date, set_starting_date] = useState('');
+  // const [ending_date, set_ending_date] = useState('');
+  // const Experience = useRef(null);
+  // const handleExaminerExper = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData();
+  //   formData.append('job_title', job_title);
+  //   formData.append('organization', organization);
+  //   formData.append('reference_email', reference_email);
+  //   formData.append('starting_date', starting_date);
+  //   formData.append('ending_date', ending_date);
+  //   formData.append('ExperianceLetter', Experience.current.files[0]);
+  //   try {
+  //     const response = await axios.post('http://127.0.0.1:5001/ExaminerExperience', formData, { headers: headers });
+  //     if (response.data["status"] === "fail") {
+  //       setError(response.data["message"]);
+  //     } else {
+  //       window.location.href = '/Settings';
+  //     }
+  //     // Redirect the user to the protected route
+  //   } catch (error) {
+  //     console.error("error: ", error);
+  //   }
+  // };
   useEffect(() => {
     console.log("use effect")
     getData();
     fetchCourses();
+    fetchQualificatoins();
+    fetchExperience();
     if (!accessToken) {
       return navigate("/");
     }
+    // const modal = document.getElementById("AddNewQualification");
+    // const btn = document.getElementById("newQua");
+    // const span = document.getElementsByClassName("close")[0];
+
+    // btn.onclick = function () {
+    //   modal.style.display = "block";
+    // }
+    // span.onclick = function () {
+    //   modal.style.display = "none";
+    // }
+    // window.onclick = function (event) {
+    //   if (event.target === modal) {
+    //     modal.style.display = "none";
+    //   }    
+    // }
+    // const modalE = document.getElementById("AddNewExp");
+    // const btnE = document.getElementById("newExp");
+    // const spanE = document.getElementsByClassName("close2")[0];
+
+    // btnE.onclick = function () {
+    //   modalE.style.display = "block";
+    // }
+
+    // spanE.onclick = function () {
+    //   modalE.style.display = "none";
+    // }
+
+    // window.onclick = function (event) {
+    //     if (event.target === modalE) {
+    //       modalE.style.display = "none";
+    //     }
+    // }
   }, []);
+  const fetchExperience = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5001/NewExperience', { headers: headers });
+      setExpList(response.data);
+    } catch (error) {
+    }
+  };
+  const fetchQualificatoins = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:5001/NewQualifications', { headers: headers });
+      setQualifList(response.data);
+    } catch (error) {
+    }
+  };
   const getData = async () => {
     try {
-      const res = await axios.get('http://127.0.0.1:5000/profile', { headers: headers });
+      const res = await axios.get('http://127.0.0.1:5001/profile', { headers: headers });
       setUserDetails(res.data)
       setUserName(res.data["personal_details"]["usr_name"])
       setCNIC(res.data["personal_details"]["usr_cnic"])
@@ -78,7 +179,7 @@ function Settings() {
   };
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/AllCourses', { headers: headers });
+      const response = await axios.get('http://127.0.0.1:5001/AllCourses', { headers: headers });
       setDataList(response.data);
     } catch (error) {
 
@@ -95,7 +196,7 @@ function Settings() {
     event.preventDefault();
     console.log(textInput)
     try {
-      const response = await axios.post('http://127.0.0.1:5000/UpdateExaminerCourse', { data: textInput }, { headers: headers });
+      const response = await axios.post('http://127.0.0.1:5001/UpdateExaminerCourse', { data: textInput }, { headers: headers });
       setErrorI(response.data["message"]);
     } catch (error) {
       console.error("error: ", error);
@@ -189,6 +290,140 @@ function Settings() {
             </form>
           </div>
         </div>
+        {/* <h2>Qualification</h2>
+        <div className="PersonalForm">
+          <table className='TableStyleQuali' border="1">
+            <thead>
+              <tr>
+                <th>Sr #</th>
+                <th>Degree Title</th>
+                <th>Institute Name</th>
+                <th>Starting Date</th>
+                <th>Ending Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {QualList.map((item, index) => (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{item[2]}</td>
+                  <td>{item[3]}</td>
+                  <td>{item[4]}</td>
+                  <td>{item[5]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <button type="button" id='newQua' style={{ width: "190px", float: "right" }}>Add New</button>
+        </div> */}
+        {/* <div id="AddNewQualification" className="Setting-Modal">
+          <div className="Setting-Modal-content" style={{ backgroundColor: "#232323" }}>
+            <span className="close">&times;</span>
+            <div>
+              <form style={{ width: "90%" }} onSubmit={handleExaminerQualification}>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <input type="text" className='inputQuabox' placeholder='Enter Degree Title' name='degree_title' onChange={(e) => setDegreeTitle(e.target.value)} required />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <input type="text" className='inputQuabox' placeholder='Enter Institute Name' name='institution' onChange={(e) => setInstitution(e.target.value)} required />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <label className='label_' htmlFor="starting_date">Starting Date:</label>
+                  <input className="form-control inputQuabox" type="date" name="starting_date" runat="server" onChange={(e) => setStartingDate(e.target.value)}
+                    style={{ height: "30px", width: "fit-content" }} />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <label className='label_' htmlFor="ending_date">Ending Date:</label>
+                  <input className="form-control inputQuabox" type="date" name="ending_date" runat="server" onChange={(e) => setEndingDate(e.target.value)}
+                    style={{ height: "30px", width: "fit-content" }} />
+                </div>
+                <div className="mainSettdiv">
+                  <label className='label_' htmlFor="Certificate">Transcript: </label>
+                  <input type="file" name="transcript" className="form-control" ref={Transcript} required />
+                </div>
+                <div className="AddBtn">
+                  <input type="submit" value="Add" />
+                </div>
+                <div>
+                  {error && <div style={{ color: "#cc4444" }}>{error}</div>}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> */}
+        {/* <h2>Experience</h2>
+        <table className='TableStyleQuali' border="1">
+          <thead>
+            <tr>
+              <th>Sr #</th>
+              <th>Job Title</th>
+              <th>Organization Name</th>
+              <th>Reference Email</th>
+              <th>Starting Date</th>
+              <th>Ending Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ExpList.map((item, index) => (
+              <tr>
+                <td>{index + 1}</td>
+                <td>{item[2]}</td>
+                <td>{item[3]}</td>
+                <td>{item[4]}</td>
+                <td>{item[5]}</td>
+                <td>{item[6]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button type="button" id='newExp' style={{ width: "190px", float: "right" }}>Add New</button> */}
+        {/* <div id="AddNewExp" className="Setting-Modal">
+          <div className="Setting-Modal-content">
+            <span className="close2">&times;</span>
+            <div>
+              <form style={{ width: "90%" }} onSubmit={handleExaminerExper}>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <input type="text" className='input-box' placeholder='Enter Job Title' name='job_title' onChange={(e) => set_job_title(e.target.value)} required />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <input type="text" className='input-box' placeholder='Enter organization Name' name='organization' onChange={(e) => set_organization(e.target.value)} required />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <input type="text" className='input-box' placeholder='Enter Reference Email' name='reference_email' onChange={(e) => set_reference_email(e.target.value)} required />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <label className='label_' htmlFor="starting_date">Starting Date:</label>
+                  <input className="form-control input-box" type="date" name="starting_date" runat="server" onChange={(e) => set_starting_date(e.target.value)}
+                    style={{ height: "30px", width: "fit-content" }} />
+                </div>
+                <div className="mainSettdiv">
+                  <span></span>
+                  <label className='label_' htmlFor="ending_date">Ending Date:</label>
+                  <input className="form-control input-box" type="date" name="ending_date" runat="server" onChange={(e) => set_ending_date(e.target.value)}
+                    style={{ height: "30px", width: "fit-content" }} />
+                </div>
+                <div className="mainSettdiv">
+                  <label className='label_' htmlFor="ExperianceLetter">Experiance Letter: </label>
+                  <input type="file" name="ExperianceLetter" className="form-control" ref={Experience} required />
+                </div>
+                <div className="AddBtnEE">
+                  <input type="submit" value="Add" />
+                </div>
+                <div>
+                  {error && <div style={{ color: "#cc4444" }}>{error}</div>}
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> */}
       </div>
 
     </>

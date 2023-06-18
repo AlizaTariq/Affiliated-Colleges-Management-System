@@ -19,7 +19,7 @@ const SignupPersonalInfo = () => {
         console.log("usr_address: ", usr_address);
         e.preventDefault();
         try {
-            const response = await axios.post('http://127.0.0.1:5000/SignUpPersonalInfo',
+            const response = await axios.post('http://127.0.0.1:5001/SignUpPersonalInfo',
                 { usr_name, usr_cnic, usr_email, usr_address, usr_bio, usr_gender, usr_password, usr_phone });
 
             if (response.data["status"] === "fail") {

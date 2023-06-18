@@ -28,7 +28,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''insert into public.user(usr_name,usr_password,usr_phoneno,usr_profile_pic,usr_cnic,usr_address,usr_email,usr_active_status,usr_bio,usr_gender) 
+                query = '''insert into users(usr_name,usr_password,usr_phoneno,usr_profile_pic,usr_cnic,usr_address,usr_email,usr_active_status,usr_bio,usr_gender) 
 	                        values (%s,%s,%s,%s ,%s,%s,%s,%s,%s,%s) returning usr_id;'''
                 cursor.execute(query,(user.usr_name, user.usr_password,user.usr_phoneno,user.usr_profile_pic, user.usr_cnic,user.usr_address,user.usr_email,user.usr_active_status,user.usr_bio,user.usr_gender))
                 id = cursor.fetchone()
@@ -50,7 +50,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''select usr_id from public.user where usr_email = %s;'''
+                query = '''select usr_id from users where usr_email = %s;'''
                 cursor.execute(query,(email,))
                 id = cursor.fetchone()
                 return id[0]
@@ -68,7 +68,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''select usr_email from public.user where usr_id = %s;'''
+                query = '''select usr_email from users where usr_id = %s;'''
                 cursor.execute(query, (id,))
                 email = cursor.fetchone()
                 return email[0]
@@ -87,7 +87,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''select usr_password from public.user where usr_email = %s;'''
+                query = '''select usr_password from users where usr_email = %s;'''
                 cursor.execute(query , (email,))
                 password = cursor.fetchone()
                 return password[0]
@@ -106,7 +106,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''select examiner_id from public.examiner where "user_id " = %s;'''
+                query = '''select examiner_id from public.examiner where user_id = %s;'''
                 cursor.execute(query,(userid,))
                 id = cursor.fetchall()
                 return id[0][0]
@@ -125,7 +125,7 @@ class model:
         try:
             if self.connection != None:  # there should be a email check weather the user exists or not
                 cursor = self.connection.cursor()
-                query = '''insert into public.examiner("user_id ","institution ","availability","ranking","resume","acceptance_count","rejection_count","verified") 
+                query = '''insert into public.examiner(user_id,institution,"availability","ranking","resume","acceptance_count","rejection_count","verified") 
                             values(%s, %s, %s,%s,%s,%s,%s,%s) returning examiner_id;'''
                 cursor.execute(query,(examiner.user_id,examiner.institution,examiner.availability,examiner.ranking,examiner.resume,examiner.acceptance_count,examiner.rejection_count,examiner.verified))
                 id = cursor.fetchone()
@@ -147,7 +147,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = "select usr_email from public.user;"
+                query = "select usr_email from users;"
                 cursor.execute(query)
                 emailList = cursor.fetchall()
                 for e in emailList:
@@ -169,7 +169,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = "select usr_cnic from public.user;"
+                query = "select usr_cnic from users;"
                 cursor.execute(query)
                 cnicList = cursor.fetchall()
                 for e in cnicList:
@@ -191,7 +191,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = '''select usr_password from public.user where "usr_email" = %s;'''
+                query = '''select usr_password from users where "usr_email" = %s;'''
                 cursor.execute(query , (email,))
                 pwd = cursor.fetchone()
                 if (pwd[0].strip() == password.strip()):
@@ -295,7 +295,7 @@ class model:
                 model.deleteAllQuaAndExp("public.qualification", ExmnrID)
                 model.deleteAllQuaAndExp("public.experience", ExmnrID)
 
-                query = '''delete from examiner where "user_id " = %s;'''
+                query = '''delete from examiner where user_id = %s;'''
                 # on  which basis examiner is deleted...  userid????
                 # should we delete user as well... if examiner is deleted...???
                 cursor.execute(query,(userID,))
@@ -319,7 +319,7 @@ class model:
                 # problem:  examiner not automatically deleted if user deleted...
                 # So deleting examiner first...
                 model.deleteExaminer(email)
-                query = '''delete from public.user where usr_email = %s;'''
+                query = '''delete from users where usr_email = %s;'''
                 cursor.execute(query,(email,))
                 self.connection.commit()
                 return True
@@ -338,7 +338,7 @@ class model:
         try:
             if self.connection:
                 cursor = self.connection.cursor()
-                query = '''select "institution ", ranking, acceptance_count, rejection_count, resume from public."examiner" where examiner_id = %s;'''
+                query = '''select institution, ranking, acceptance_count, rejection_count, resume from public."examiner" where examiner_id = %s;'''
                 cursor.execute(query,(examiner_id,))
                 data = cursor.fetchall()
                 return data[0]
@@ -372,7 +372,7 @@ class model:
         try:
             if self.connection:
                 cursor = self.connection.cursor()
-                query = '''SELECT usr_name, usr_cnic, usr_phoneno, usr_address, usr_email, usr_gender,usr_bio, usr_profile_pic,usr_active_status FROM public."user" where usr_id = %s;'''
+                query = '''SELECT usr_name, usr_cnic, usr_phoneno, usr_address, usr_email, usr_gender,usr_bio, usr_profile_pic,usr_active_status FROM public.user where usr_id = %s;'''
                 cursor.execute(query,(usr_id,))
                 data = cursor.fetchall()
                 return data[0]
@@ -745,7 +745,7 @@ class model:
         try:
             if self.connection != None:
                 cursor = self.connection.cursor()
-                query = f'''update public."user" set usr_name = '{usr_name}', usr_cnic = '{usr_cnic}', usr_email = '{usr_email}',
+                query = f'''update public.user set usr_name = '{usr_name}', usr_cnic = '{usr_cnic}', usr_email = '{usr_email}',
                             usr_address = '{usr_address}', usr_bio = '{usr_bio}', usr_gender = '{usr_gender}', usr_phoneno = '{usr_phone}', 
                             usr_active_status = {usr_active_status}, usr_profile_pic = '{profile}' 
                             where usr_id = {user_id};

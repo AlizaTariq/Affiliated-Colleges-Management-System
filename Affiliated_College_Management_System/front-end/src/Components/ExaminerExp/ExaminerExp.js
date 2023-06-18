@@ -21,7 +21,7 @@ const ExaminerExp = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/NewExperience', { headers: header });
+            const response = await axios.get('http://127.0.0.1:5001/NewExperience', { headers: header });
             setDataList(response.data);
         } catch (error) {
         }
@@ -43,7 +43,7 @@ const ExaminerExp = () => {
         formData.append('ending_date', ending_date);
         formData.append('ExperianceLetter', fileInputRef.current.files[0]);
         try {
-            const response = await axios.post('http://127.0.0.1:5000/ExaminerExperience', formData, { headers: header });
+            const response = await axios.post('http://127.0.0.1:5001/ExaminerExperience', formData, { headers: header });
             if (response.data["status"] === "fail") {
                 setError(response.data["message"]);
             } else {

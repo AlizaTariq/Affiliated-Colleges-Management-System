@@ -31,7 +31,7 @@ const RequestReceived = () => {
   };
   const sendSelection = async (selectedOption) => {
     try {
-      const response = await axios.post('http://127.0.0.1:5000/UpdateStatus', { Id: id, type: type, selection: selectedOption }, { headers: headers });
+      const response = await axios.post('http://127.0.0.1:5001/UpdateStatus', { Id: id, type: type, selection: selectedOption }, { headers: headers });
       console.log(response.data);
       navigate("/home")
     } catch (error) { }
@@ -43,7 +43,7 @@ const RequestReceived = () => {
       return navigate('/?redirectto=' + encodeURIComponent(url));
     }
     axios
-      .get("http://127.0.0.1:5000/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
+      .get("http://127.0.0.1:5001/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
       .then((res) => {
         const resData = res.data;
         console.log(resData)

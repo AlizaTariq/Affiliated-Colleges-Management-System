@@ -20,7 +20,7 @@ const SignupExaminerInfo = () => {
     formData.append('institution', institution);
     formData.append('resume', fileInputRef.current.files[0]);
     try {
-      const response = await axios.post('http://127.0.0.1:5000/SignUpExaminerInfo', formData, { headers: headers });
+      const response = await axios.post('http://127.0.0.1:5001/SignUpExaminerInfo', formData, { headers: headers });
       if (response.data["status"] === "fail") {
         setError(response.data["message"]);
       } else {

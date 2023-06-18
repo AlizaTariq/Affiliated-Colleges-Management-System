@@ -27,7 +27,7 @@ const UploadResult = () => {
             return navigate('/?redirectto=' + encodeURIComponent(url));
         }
         axios
-            .get("http://127.0.0.1:5000/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
+            .get("http://127.0.0.1:5001/DutyDetails?Id=" + id + "&type=" + type, { headers: headers })
             .then((res) => {
                 const resData = res.data;
                 console.log(resData)
@@ -47,7 +47,7 @@ const UploadResult = () => {
         formData.append('Id', id)
         formData.append('type', type)
         try {
-            const response = await axios.post('http://127.0.0.1:5000/GetResult', formData, { headers: headers });
+            const response = await axios.post('http://127.0.0.1:5001/GetResult', formData, { headers: headers });
             console.log(response)
             // Redirect the user to the protected route
             setMessage(response.data["message"]);

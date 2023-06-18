@@ -75,3 +75,70 @@ h2 {
   font-size: 20px;
   text-align: center;
 }
+
+
+.TableStyleQuali {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+}
+
+.TableStyleQuali th,
+.TableStyleQuali td {
+  text-align: center;
+  padding: 12px;
+  color: white;
+  border: 1px solid #ddd;
+}
+
+.TableStyleQuali th {
+  background-color: #171d1f;
+  color: #fff;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.TableStyleQuali tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.TableStyleQuali tr:hover {
+  background-color: rgb(46, 45, 45);
+}
+
+.Setting-Modal {
+  display: none;
+  position: fixed;
+  left: 35%;
+  top: 16%;
+  width: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.Setting-Modal-content {
+  margin: auto;
+  border-radius: 20px;
+  background-color: #171d1f;
+}
+
+.mainSettdiv {
+  display: flex;
+  margin: 12px;
+}
+.inputQuabox {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #fff;
+  border-style: inset;
+  height: 32px;
+  border-radius: 20px;
+  padding: 0 10px;
+  box-sizing: border-box;
+  outline: none;
+  text-align: center;
+  color: #fff;
+}

@@ -24,7 +24,7 @@ const ExaminerInterest = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://127.0.0.1:5000/AllCourses', { headers: header });
+            const response = await axios.get('http://127.0.0.1:5001/AllCourses', { headers: header });
             setDataList(response.data);
         } catch (error) {
 
@@ -41,7 +41,7 @@ const ExaminerInterest = () => {
         event.preventDefault();
         console.log(textInput)
         try {
-            const response = await axios.post('http://127.0.0.1:5000/AddExaminerCourse', { data: textInput }, { headers: header });
+            const response = await axios.post('http://127.0.0.1:5001/AddExaminerCourse', { data: textInput }, { headers: header });
             if (response.data["status"] === "fail") {
                 setError(response.data["message"]);
             } else {
