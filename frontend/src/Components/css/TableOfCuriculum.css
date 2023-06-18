@@ -29,10 +29,26 @@
 }
 .updBtn {
   background-color: teal;
-  margin-top: 5%;
-  float: right;
   color: #fff;
+  border-radius: 7px;
+  padding: 7px;
+  margin: 3px;
+  margin-top: 10px;
+  font-size: 17px;
 }
 .updBtn:hover {
   background-color: rgb(4, 105, 105);
+}
+.modaling {
+  color: #fff;
+
+  background-image: linear-gradient(
+    to bottom right,
+    #01263a,
+    #150122,
+    rgb(3, 0, 19),
+    #01263a,
+    black
+  );
+  color: rgba(2, 250, 23, 0.897);
 }

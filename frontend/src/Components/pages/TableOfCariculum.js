@@ -35,19 +35,30 @@ export default function TableOfCariculum() {
       ? filteredItems
       : data_get.slice(indexOfFirstItem, indexOfLastItem);
   const searching = (event) => {
-    const searchValue = event.target.value.toLowerCase();
+    const searchValue = event.target.value;
     setSearchValue(searchValue);
+
     if (searchValue === "") {
       setFilteredItems([]);
       return;
     }
 
-    const filteredItems = data_get.filter((item) =>
-      item[5].toLowerCase().includes(searchValue)
-    );
+    const filteredItems = data_get.filter((item) => {
+      if (
+        item[3].toString() === searchValue ||
+        item[1].toLowerCase() === searchValue.toLowerCase() ||
+        item[4].toLowerCase() === searchValue.toLowerCase() ||
+        item[5].toLowerCase() === searchValue.toLowerCase() ||
+        item[2].toString() === searchValue ||
+        item[0].toString() === searchValue
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
     setFilteredItems(filteredItems);
-    // setCurrentPage(1);
-    // handlePageChange()
   };
 
   // Function to handle page change
@@ -84,35 +95,32 @@ export default function TableOfCariculum() {
     const url = "http://localhost:5000/getDataFromReact";
     const progressing = document.getElementById("progressbarvalue");
     const progressblue = document.getElementById("progressBlue");
-    var formData = new FormData();
-    formData.append("fileName", JSON.stringify(selectedFile));
-    formData.append("ArrayList", JSON.stringify(data));
-    const config = {
-      onUploadProgress: function (progressEvent) {
-        const percentCompleted =
-          Math.round(progressEvent.loaded / progressEvent.total) * 100;
-        progressblue.setAttribute("value", percentCompleted);
-        progressing.textContent = percentCompleted;
-        if (percentCompleted === 100) {
-          progressing.textContent = "Upload Completed!";
-        }
-      },
-    };
+    if (selectedFile != null) {
+      var formData = new FormData();
+      formData.append("fileName", JSON.stringify(selectedFile));
+      formData.append("ArrayList", JSON.stringify(data));
+
+      var config = {
+        onUploadProgress: function (progressEvent) {
+          const percentCompleted =
+            Math.round(progressEvent.loaded / progressEvent.total) * 100;
+          progressblue.setAttribute("value", percentCompleted);
+          progressing.textContent = percentCompleted;
+          if (percentCompleted === 100) {
+            progressing.textContent = "Upload Completed!";
+          }
+        },
+      };
+    }
+
     axios
       .post(url, formData, config)
       .then((res) => console.log(res))
       .catch((err) => alert(err + "  OOPS! BAD REQUEST  "));
+    // setSelectedFile(null);
+    // document.getElementById("progressbarvalue").textContent = "0 %";
+    // document.getElementById("progressBlue").value = 0;
   }
-
-  const handleClick = (event) => {
-    //  window.open("/FORMPDF",{search: createSearchParams (event.target.id).toString()});
-    navigate({
-      state: {
-        pathname: "/FORMPDF",
-        search: createSearchParams(event.target.id).toString(),
-      },
-    });
-  };
 
   if (!accessToken) {
     return <Login />; // Render the Login component if access token doesn't exist
@@ -132,13 +140,13 @@ export default function TableOfCariculum() {
               type="search"
               placeholder="Search"
             />
-            <Button
+            <button
               className="updBtn"
               data-toggle="modal"
               data-target="#exampleModal"
             >
               Upload Curriculum
-            </Button>
+            </button>
           </p>
         </div>
         <div className="d-flex flex-row bd-highlight">
@@ -163,19 +171,7 @@ export default function TableOfCariculum() {
             <tbody>
               {currentItems
                 ? currentItems.map((item) => (
-                    <tr
-                      style={{ border: "1px" }}
-                      key={item[0]}
-                      id={item[0]}
-                      onClick={() =>
-                        navigate({
-                          pathname: "/FORMPDF",
-                          search: createSearchParams({
-                            courseId: item[0],
-                          }).toString(),
-                        })
-                      }
-                    >
+                    <tr style={{ border: "1px" }} key={item[0]} id={item[0]}>
                       <td className="tableText">{item[0]}</td>
                       <td className="tableText">{item[1]}</td>
                       <td className="tableText">{item[2]}</td>
@@ -186,7 +182,13 @@ export default function TableOfCariculum() {
                         <button
                           className="showDutyTableBtn"
                           id={item[0]}
-                          onClick={handleClick}
+                          onClick={() =>
+                            window.open(
+                              `/FORMPDF?${createSearchParams({
+                                courseId: item[0],
+                              }).toString()}`
+                            )
+                          }
                         >
                           Details
                         </button>
@@ -207,70 +209,6 @@ export default function TableOfCariculum() {
           )}
         </div>
       </div>
-
-      {/* <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Upload Carriculum
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <label>Upload Your File </label>
-              <div className="container" id="modell">
-                <div id="browsing">
-                  <h1>
-                    <i className="fa fa-download" aria-hidden="true"></i>
-                  </h1>
-                  <button
-                    className="btn btn-primary"
-                    onClick={showOpenFileDialog}
-                  >
-                    Import Data
-                  </button>
-                </div>
-              </div>
-              <div>
-                <p>Your File Name: {selectedFile} </p>
-              </div>
-              <div>
-                <label id="progressbarvalue" htmlFor="progressBar">
-                  0 %
-                </label>
-                <progress id="progressBlue" value="0" max="100"></progress>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                Close
-              </button>
-              <button className="btn btn-primary" onClick={uploadFile}>
-                Upload
-              </button>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div
         className="modal fade"
         id="exampleModal"
@@ -280,7 +218,7 @@ export default function TableOfCariculum() {
         aria-hidden="true"
       >
         <div className="modal-dialog" role="document">
-          <div className="modal-content">
+          <div className="modal-content modaling">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 Upload Carriculum
@@ -290,27 +228,25 @@ export default function TableOfCariculum() {
                 className="close"
                 data-dismiss="modal"
                 aria-label="Close"
+                onClick={() => {
+                  setSelectedFile(null);
+                  document.getElementById("progressbarvalue").textContent =
+                    "0 %";
+                  document.getElementById("progressBlue").value = 0;
+                }}
                 style={{ border: "white" }}
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
-              {/* <label >Degree</label>
-                      <select  className="form-select" aria-label="Default select example">
-                        <option value="1">CS</option>
-                        <option value="2">IT</option>
-                      </select> */}
               <label>Upload Your File </label>
               <div className="container" id="modell">
                 <div id="browsing">
                   <h1>
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </h1>
-                  <button
-                    className="btn btn-primary"
-                    onClick={showOpenFileDialog}
-                  >
+                  <button className="updBtn" onClick={showOpenFileDialog}>
                     Import Data
                   </button>
                 </div>
@@ -318,7 +254,6 @@ export default function TableOfCariculum() {
               <div>
                 <h6
                   style={{
-                    color: "black",
                     fontWeight: "lighter",
                     fontSize: "8",
                   }}
@@ -338,6 +273,12 @@ export default function TableOfCariculum() {
                 type="button"
                 className="btn btn-secondary"
                 data-dismiss="modal"
+                onClick={() => {
+                  setSelectedFile(null);
+                  document.getElementById("progressbarvalue").textContent =
+                    "0 %";
+                  document.getElementById("progressBlue").value = 0;
+                }}
               >
                 Close
               </button>
