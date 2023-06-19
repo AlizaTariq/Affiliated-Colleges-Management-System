@@ -10,6 +10,9 @@
   color: rgba(2, 250, 23, 0.897);
   font-family: Menlo;
 }
+.PrfHead {
+  color: rgba(2, 250, 23, 0.897);
+}
 .schHeading {
   background-color: #01263a;
   color: white;
@@ -34,9 +37,6 @@
   background-color: rgb(4, 105, 105);
 }
 
-
-
-
 .scrollable-content {
   max-height: 250px; /* Adjust the maximum height as needed */
   overflow-y: auto;
@@ -45,10 +45,10 @@
   color: #fff;
 
   padding-left: 7%;
-  padding-right:7%;
+  padding-right: 7%;
 }
 
-.profileimgDiv{
+.profileimgDiv {
   /* align-items: center; */
   background-color: #01263a;
   display: flex;
@@ -56,44 +56,41 @@
   align-items: center;
 }
 
-.parent{
-  display:flex;
-  margin:3rem;
-  padding:1rem 1rem;
-  text-align:center;
+.parent {
+  display: flex;
+  margin: 3rem;
+  padding: 1rem 1rem;
+  text-align: center;
 }
-.child1{
-  display:inline-block;
+.child1 {
+  display: inline-block;
   vertical-align: middle;
-  padding-left:4rem;
-  padding-right:5rem;
-  color:rgb(4, 244, 4);
+  padding-left: 4rem;
+  padding-right: 5rem;
+  color: rgb(4, 244, 4);
 }
-.child2{
-  display:inline-block;
+.child2 {
+  display: inline-block;
   vertical-align: middle;
-  padding-left:5rem;
-  padding-right:4rem;
-  color:rgb(251, 43, 43);
+  padding-left: 5rem;
+  padding-right: 4rem;
+  color: rgb(251, 43, 43);
 }
 
-
-
-.parentone{
-  display:flex;
-  margin:2rem;
+.parentone {
+  display: flex;
+  margin: 2rem;
   /* padding:1rem 1rem; */
-  text-align:center;
+  text-align: center;
 }
-.child
-{
-  display:inline-block;
+.child {
+  display: inline-block;
   vertical-align: middle;
-  padding-left:7rem;
-  padding-right:3rem;
+  padding-left: 7rem;
+  padding-right: 3rem;
 }
 
-.ptexthere{
+.ptexthere {
   font-size: 12px;
   font-family: Verdana;
 }

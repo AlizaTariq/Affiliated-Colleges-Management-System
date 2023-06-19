@@ -57,7 +57,7 @@ const ShowDutyDetail = (props) => {
     <>
       <NavBar />
       {console.log("duties ==> ", duty)}
-      <div className="ntfPage">{duty.map((item) => console.log(item))}</div>
+      <div className="ntfPagehere">{duty.map((item) => console.log(item))}</div>
       <div className="showDutyDetailPrac">
         <div className="mainHeading">
           <h1>Duty Information</h1>

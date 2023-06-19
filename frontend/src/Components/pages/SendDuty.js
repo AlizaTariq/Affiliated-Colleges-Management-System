@@ -280,56 +280,107 @@ const SendDuty = (props) => {
                         show={lgShow}
                         aria-labelledby="example-modal-sizes-title-lg"
                       >
-                        <Modal.Header style={{backgroundColor: '#01263a', color: '#fff' }} closeButton className="custom-header">
-                          <Modal.Title className="modalHeader" style={{backgroundColor: '#01263a', color: '#fff' }} id="example-modal-sizes-title-lg">
-                            <center><b>Profile</b></center>
+                        <Modal.Header
+                          style={{ backgroundColor: "#01263a", color: "#fff" }}
+                          closeButton
+                          className="custom-header"
+                        >
+                          <Modal.Title
+                            className="modalHeader"
+                            style={{
+                              backgroundColor: "#01263a",
+                              color: "#fff",
+                            }}
+                            id="example-modal-sizes-title-lg"
+                          >
+                            <center>
+                              <b className="PrfHead">Profile</b>
+                            </center>
                           </Modal.Title>
                         </Modal.Header>
-                        <Modal.Body style={{backgroundColor: '#01263a', color: '#fff' }}>
+                        <Modal.Body
+                          style={{ backgroundColor: "#01263a", color: "#fff" }}
+                        >
                           {profileData && profileData[0] && (
                             <>
-                              <div className="profileimgDiv"><img src={profile} alt="profile" className="profile" /></div>
+                              <div className="profileimgDiv">
+                                <img
+                                  src={profile}
+                                  alt="profile"
+                                  className="profile"
+                                />
+                              </div>
                               <div className="parentone">
-                                  <div className="child">
-                                    <h6><b>Name: </b>{profileData[0][2]}</h6>
-                                    {/* <p className="ptexthere">{profileData[0][2]}</p> */}
-                                  </div>
-                                  <div className="child">
-                                    <h6><b>CNIC: </b>{profileData[0][3]}</h6>
-                                    {/* <p className="ptexthere">{profileData[0][3]}</p> */}
-                                  </div>
+                                <div className="child">
+                                  <h6>
+                                    <b className="PrfHead">Name: </b>
+                                    {profileData[0][2]}
+                                  </h6>
+                                  {/* <p className="ptexthere">{profileData[0][2]}</p> */}
                                 </div>
-                                <div className="scrollable-content">
-                                
-                              
-                                <h6><b>Email: </b>{profileData[0][4]}</h6>
+                                <div className="child">
+                                  <h6>
+                                    <b className="PrfHead">CNIC: </b>
+                                    {profileData[0][3]}
+                                  </h6>
+                                  {/* <p className="ptexthere">{profileData[0][3]}</p> */}
+                                </div>
+                              </div>
+                              <div className="scrollable-content">
+                                <h6>
+                                  <b className="PrfHead">Email: </b>
+                                  {profileData[0][4]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][4]}</p> */}
-                                <h6><b>Address: </b>{profileData[0][5]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Address: </b>
+                                  {profileData[0][5]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][5]}</p> */}
-                                <h6><b>Bio: </b>{profileData[0][6]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Bio: </b>
+                                  {profileData[0][6]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][6]}</p> */}
-                                <h6><b>Gender: </b>{profileData[0][7]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Gender: </b>
+                                  {profileData[0][7]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][7]}</p> */}
-                                <h6><b>Institute: </b>{profileData[0][10]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Institute: </b>
+                                  {profileData[0][10]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][10]}</p> */}
-                                <h6><b>Ranking: </b>{profileData[0][11]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Ranking: </b>
+                                  {profileData[0][11]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][11]}</p> */}
-                                <h6><b>Resume: </b>{profileData[0][12]}</h6>
+                                <h6>
+                                  <b className="PrfHead">Resume: </b>
+                                  {profileData[0][12]}
+                                </h6>
                                 {/* <p className="ptexthere">{profileData[0][12]}</p> */}
                                 <div className="Parent">
                                   <div className="child1">
-                                    <h6><b>Acceptance Count: </b></h6>
-                                    <p className="ptexthere">{profileData[0][13]}</p>
-                                  </div>  
+                                    <h6>
+                                      <b>Acceptance Count: </b>
+                                    </h6>
+                                    <p className="ptexthere">
+                                      {profileData[0][13]}
+                                    </p>
+                                  </div>
                                   <div className="child2">
-                                    <h6><b>Rejection Count: </b></h6>
-                                    <p className="ptexthere">{profileData[0][14]}</p>
+                                    <h6>
+                                      <b>Rejection Count: </b>
+                                    </h6>
+                                    <p className="ptexthere">
+                                      {profileData[0][14]}
+                                    </p>
                                   </div>
                                 </div>
-                                
-                              
                               </div>
-                              
                             </>
                           )}
                         </Modal.Body>
