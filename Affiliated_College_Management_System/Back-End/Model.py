@@ -532,7 +532,11 @@ class model:
                 cursor.execute(query,(dtId,))
                 data = cursor.fetchall()
                 # get roadmap id
-                rdId = data[len(data) - 1][5]
+                if dtType == "Practical_Exam":
+                    rdId = data[len(data) - 1][5]
+                else :
+                    rdId = data[len(data) - 1][3]
+                    
                 query = '''select rd_crs_code, rd_crs_name, rd_crs_book, rd_crs_outlline from roadmap where rd_id = %s;'''
                 cursor.execute(query,(rdId,))
                 rdData = cursor.fetchall()
@@ -559,6 +563,7 @@ class model:
                 return combinedList
         except Exception as e:
             print("Exception in getDutyDetails: ", e)
+            raise(e)
             return []
         finally:
             if cursor:
@@ -672,6 +677,7 @@ class model:
                 return False
         except Exception as e:
             print("Exception in UpdateStatus", str(e))
+            raise(e)
             return False
         finally:
             if cursor != None:
