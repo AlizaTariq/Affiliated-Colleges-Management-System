@@ -1,9 +1,7 @@
 .body {
   font-family: Verdana;
   color: #fff;
-  /* text-align: center; */
-  /* justify-content: center; */
-  /* display: flex;  */
+
   padding-top: 90px;
   padding-bottom: 90px;
   background-image: linear-gradient(
@@ -41,14 +39,29 @@
 }
 .modaling {
   color: #fff;
-
-  background-image: linear-gradient(
-    to bottom right,
-    #01263a,
-    #150122,
-    rgb(3, 0, 19),
-    #01263a,
-    black
-  );
-  color: rgba(2, 250, 23, 0.897);
+  background-color: rgb(3, 0, 19);
+  color: #fff;
+  border-radius: 10px;
+}
+#modell,
+#iconing {
+  display: flex;
+  justify-content: center; /* Horizontally center */
+  align-items: center; /* Vertically center */
+}
+.btn-secondary {
+  color: red !important;
+  background-color: #dbd3d3 !important;
+}
+.btn-primary {
+  background-color: rgb(4, 105, 105);
+}
+.btn-primary:hover {
+  background-color: teal;
+  border: none;
+}
+.btn-secondary:hover {
+  color: rgb(219, 26, 26) !important;
+  background-color: #6e6565 !important;
+  font-weight: bold;
 }

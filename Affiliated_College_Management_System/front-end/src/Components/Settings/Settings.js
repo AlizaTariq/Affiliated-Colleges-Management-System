@@ -194,7 +194,11 @@ function Settings() {
     console.log(textInput)
     try {
       const response = await axios.post('http://127.0.0.1:5001/UpdateExaminerCourse', { data: textInput }, { headers: headers });
-      setErrorI(response.data["message"]);
+      if (response.data["status"] === "fail") {
+        setErrorI(response.data["message"]);
+    } else {
+        window.location.href = '/Settings';
+    }
     } catch (error) {
       console.error("error: ", error);
     }

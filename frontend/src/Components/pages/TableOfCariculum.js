@@ -241,9 +241,9 @@ export default function TableOfCariculum() {
             </div>
             <div className="modal-body">
               <label>Upload Your File </label>
-              <div className="container" id="modell">
+              <div id="modell">
                 <div id="browsing">
-                  <h1>
+                  <h1 id="iconing">
                     <i className="fa fa-download" aria-hidden="true"></i>
                   </h1>
                   <button className="updBtn" onClick={showOpenFileDialog}>
@@ -263,7 +263,7 @@ export default function TableOfCariculum() {
               </div>
               <div>
                 <label id="progressbarvalue" htmlFor="progressBar">
-                  0 %
+                  0%
                 </label>
                 <progress id="progressBlue" value="0" max="100"></progress>
               </div>
@@ -276,7 +276,7 @@ export default function TableOfCariculum() {
                 onClick={() => {
                   setSelectedFile(null);
                   document.getElementById("progressbarvalue").textContent =
-                    "0 %";
+                    "0 % ";
                   document.getElementById("progressBlue").value = 0;
                 }}
               >

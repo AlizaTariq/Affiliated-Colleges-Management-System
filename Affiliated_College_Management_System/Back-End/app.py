@@ -65,8 +65,7 @@ def essentials(func):
             g.model = model()
             if request.headers.get('authorization') and get_jwt_identity() != None:
                 g.user_id = get_jwt_identity()
-                g.examiner_id = g.model.getExaminerID(g.user_id)
-                print(g.examiner_id)
+                g.examiner_id = g.model.getExaminerID(g.user_id)                
             api_result = func(*args, **kwargs)
             # close connections
             g.model.__del__()
