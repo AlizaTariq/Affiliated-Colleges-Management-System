@@ -762,20 +762,20 @@ class model:
             if cursor != None:
                 cursor.close()
 
-    def updateProfile(self, user_id, profile):
-        cursor = None
-        try:
-            if self.connection != None:
-                cursor = self.connection.cursor()
-                query = '''update public.users set usr_profile_pic = %s where usr_id = %s;'''
-                cursor.execute(query, profile, user_id)
-                self.connection.commit()                
-                return True
-            else:
-                return False
-        except Exception as e:
-            print("Exception in updateProfile", str(e))
-            return False
-        finally:
-            if cursor != None:
-                cursor.close()
+    # def updateProfile(self, user_id, profile):
+        # cursor = None
+        # try:
+        #     if self.connection != None:
+        #         cursor = self.connection.cursor()
+        #         query = '''update public.users set usr_profile_pic = %s where usr_id = %s;'''
+        #         cursor.execute(query, profile, user_id)
+        #         self.connection.commit()                
+        #         return True
+        #     else:
+        #         return False
+        # except Exception as e:
+        #     print("Exception in updateProfile", str(e))
+        #     return False
+        # finally:
+        #     if cursor != None:
+        #         cursor.close()
