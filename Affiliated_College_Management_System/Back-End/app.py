@@ -48,18 +48,6 @@ mail = Mail(app)
 app.config['MAIL_DEFAULT_SENDER'] = "elite.express243@gmail.com"
 mail = Mail(app)
 
-def is_valid_email(email):
-    api_key = 'f7b74b5a429c9a8920c793907a0d0600'
-    url = f'http://apilayer.net/api/check?access_key={api_key}&email={email}'
-
-    response = requests.get(url)
-    data = response.json()
-
-    if 'smtp_check' in data and data['smtp_check']:
-        return True
-    else:
-        return False
-
 def is_phone_number_present(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, None)
@@ -102,13 +90,10 @@ def SignUpPersonalInfo():
         usr_gender = request.json.get("usr_gender")
         usr_password = request.json.get("usr_password")
         usr_phone = request.json.get("usr_phone")
-        usr_profile_pic = "..\\front-end\\src\\Static\\ProfilePics\\empty.png"
+        usr_profile_pic = "../front-end//public/assets/ProfilePics/empty.png"
         usr_active_status = True
         _hashed_password = generate_password_hash(usr_password)
 
-        if not is_valid_email(usr_email) :
-            return jsonify({"status": "fail", "message": "Invalid Email"})
-        
         if not is_phone_number_present(usr_phone) :
             return jsonify({"status": "fail", "message": "Phone number is not valid"})
         
@@ -658,8 +643,6 @@ def UpdateExaminer():
             
 
         user_ = m.getDataofUser(user_id)
-        if usr_email != user_[4] and not is_valid_email(usr_email) :
-            return jsonify({"status": "fail", "message": "Invalid Email"})
         
         if usr_phone != user_[2] and not is_phone_number_present(usr_phone) :
             return jsonify({"status": "fail", "message": "Phone number is not valid"})
