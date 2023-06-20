@@ -48,18 +48,6 @@ mail = Mail(app)
 app.config['MAIL_DEFAULT_SENDER'] = "elite.express243@gmail.com"
 mail = Mail(app)
 
-def is_valid_email(email):
-    api_key = 'f7b74b5a429c9a8920c793907a0d0600'
-    url = f'http://apilayer.net/api/check?access_key={api_key}&email={email}'
-
-    response = requests.get(url)
-    data = response.json()
-
-    if 'smtp_check' in data and data['smtp_check']:
-        return True
-    else:
-        return False
-
 def is_phone_number_present(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, None)
@@ -77,8 +65,7 @@ def essentials(func):
             g.model = model()
             if request.headers.get('authorization') and get_jwt_identity() != None:
                 g.user_id = get_jwt_identity()
-                g.examiner_id = g.model.getExaminerID(g.user_id)
-                print(g.examiner_id)
+                g.examiner_id = g.model.getExaminerID(g.user_id)                
             api_result = func(*args, **kwargs)
             # close connections
             g.model.__del__()
@@ -102,19 +89,15 @@ def SignUpPersonalInfo():
         usr_gender = request.json.get("usr_gender")
         usr_password = request.json.get("usr_password")
         usr_phone = request.json.get("usr_phone")
-        usr_profile_pic = "..\\front-end\\src\\Static\\ProfilePics\\empty.png"
+        usr_profile_pic = "../../../public/assets/ProfilePics/empty.png"
         usr_active_status = True
         _hashed_password = generate_password_hash(usr_password)
 
-        if not is_valid_email(usr_email) :
-            return jsonify({"status": "fail", "message": "Invalid Email"})
-        
         if not is_phone_number_present(usr_phone) :
             return jsonify({"status": "fail", "message": "Phone number is not valid"})
         
         if not is_cnic_number_present(usr_cnic) :
             return jsonify({"status": "fail", "message": "CNIC is not valid"})
-
         # set data in obj
         data = User(usr_name, _hashed_password, usr_phone, usr_cnic, usr_profile_pic, usr_address,
                usr_email, usr_active_status, usr_bio, usr_gender)
@@ -158,7 +141,7 @@ def SignUpExaminerInfo():
 
         # Get File and Save in a directory
         f = request.files.get("resume")
-        resume = f"..\\front-end\\src\\Static\\Resumes\\{user_id}.pdf"
+        resume = f"../front-end//public/assets/Resumes/{user_id}.pdf"
         if Path(resume).is_file():
             os.remove(resume)
         f.save(resume)
@@ -169,6 +152,8 @@ def SignUpExaminerInfo():
         acceptance_count = 0
         rejection_count = 0
         verified = False
+
+        resume = "../../../public/assets/Resumes/{user_id}.pdf"
         data = examiner(user_id, institution, availability, ranking,
                         resume, acceptance_count, rejection_count, verified)
 
@@ -199,11 +184,12 @@ def ExaminerQualification():
         f = request.files.get("transcript")
 
         # Strore file in local directory
-        transcript = f'''..\\front-end\\src\\Static\\transcripts\\{datetime.now().strftime("%d%m%Y%H%M%S")},{examiner_id}.pdf'''
+        transcript = f'''../front-end//public/assets/transcripts/{datetime.now().strftime("%d%m%Y%H%M%S")},{examiner_id}.pdf'''
         if Path(transcript).is_file():
             os.remove(transcript)
         f.save(transcript)
 
+        transcript = f'''../../../public/assets/transcripts/{datetime.now().strftime("%d%m%Y%H%M%S")},{examiner_id}.pdf'''
         data = qualification(examiner_id, degree_title, transcript,
                              institution, starting_date, ending_date)
 
@@ -233,11 +219,12 @@ def ExaminerExperience() :
         ending_date = request.form.get("ending_date")
         f = request.files.get("ExperianceLetter")
         # Strore file in local directory
-        ExperianceLetters = f'..\\front-end\\src\\Static\\ExperianceLetters\\{datetime.now().strftime("%d%m%Y%H%M%S")}_{examiner_id}.pdf'
+        ExperianceLetters = f'../front-end//public/assets/ExperianceLetters/{datetime.now().strftime("%d%m%Y%H%M%S")}_{examiner_id}.pdf'
         if Path(ExperianceLetters).is_file():
             os.remove(ExperianceLetters)
         f.save(ExperianceLetters)
 
+        ExperianceLetters = f'../../../public/assets/ExperianceLetters/{datetime.now().strftime("%d%m%Y%H%M%S")}_{examiner_id}.pdf'
         data = experience(examiner_id, job_title, ExperianceLetters,
                           organization, reference_email, starting_date, ending_date)
 
@@ -514,12 +501,13 @@ def GetPaper():
         type_ = request.form.get("type")
         paper = request.files.get("Paper")
         # Store paper in local directory
-        papers = f"..\\front-end\\src\\Static\\papers\\{id}.pdf"
+        papers = f"../front-end//public/assets/papers/{id}.pdf"
         if Path(papers).is_file():
             os.remove(papers)
         paper.save(papers)
         # store nme of the paper in the DataBase
         m = g.model
+        papers = f"../../../public/assets/papers/{id}.pdf"
         if m.InsertUploadedPaper(id, papers, type_):
             return jsonify({"status": "success", "message": "Paper Uploaded Successfully"})
         return jsonify({"status": "failed", "message": "Failed to Upload Paper"})
@@ -536,12 +524,13 @@ def GetResult():
         type_ = request.form.get("type")
         result = request.files.get("result")
         # Store result in local directory
-        results = f"..\\front-end\\src\\Static\\results\\{id}.pdf"
+        results = f"../front-end//public/assets/results/{id}.pdf"
         if Path(results).is_file():
             os.remove(results)
         result.save(results)
         # store nme of the result in the DataBase
         m = g.model
+        results = f"../../../public/assets/results/{id}.pdf"
         if m.InsertUploadedResult(id, results, type_):
             return jsonify({"status": "success", "message": "Result Uploaded Successfully"})
         return jsonify({"status": "failed", "message": "Failed to Upload result"})
@@ -642,24 +631,21 @@ def UpdateExaminer():
         usr_active_status = request.form.get("usr_active_status")
 
         p = request.files.get("profile")
-        profile = f"..\\front-end\\src\\Static\\ProfilePics\\{user_id}.png"
+        profile = f"../front-end//public/assets/ProfilePics/{user_id}.png"
         if p != None:
             if Path(profile).is_file():
                 os.remove(profile)
-            p.save(profile) 
-            m.updateProfile(user_id, profile)
+            p.save(profile)
 
         f = request.files.get("resume")
         if f != None:
-            resume = f"..\\front-end\\src\\Static\\Resumes\\{user_id}.pdf"
+            resume = f"../front-end//public/assets/Resumes/{user_id}.pdf"
             if Path(resume).is_file():
                 os.remove(resume)
             f.save(resume)    
             
 
         user_ = m.getDataofUser(user_id)
-        if usr_email != user_[4] and not is_valid_email(usr_email) :
-            return jsonify({"status": "fail", "message": "Invalid Email"})
         
         if usr_phone != user_[2] and not is_phone_number_present(usr_phone) :
             return jsonify({"status": "fail", "message": "Phone number is not valid"})

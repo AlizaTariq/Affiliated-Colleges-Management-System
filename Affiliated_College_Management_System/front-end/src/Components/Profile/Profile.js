@@ -33,7 +33,12 @@ const Profile = () => {
       setError("Error loading data");
     }
   };
+  var abc = "123";
   const getQualifications = async () => {
+    // let abc=[];
+    QualificationsList = ["abc"]
+    setQualificationsList(["abc"]);
+
     try {
       const response = await axios.get('http://127.0.0.1:5001/NewQualifications', { headers: headers });
       setQualificationsList(response.data);
@@ -52,94 +57,103 @@ const Profile = () => {
     getExperience();
     getQualifications();
     getUserDetails();
-    if (!accessToken) {
-      return navigate("/");
-    }
+    // if (!accessToken) {
+    //   return navigate("/");
+    // }
   }, []);
-  
-  if (!accessToken) {
-    return navigate("/"); // Render the Login component if access token doesn't exist
-  }
+
+  // if (!accessToken) {
+  //   return navigate("/"); // Render the Login component if access token doesn't exist
+  // }
 
   return (
     <>
       <Navbar />
-      <div className="container py-5">
+      <div className="container py-5" style={{ margin: "auto" }}>
+
         <div className="row">
-          <div className="col-lg-3 col-lg-6 mt-5">
+          <div className="col-3 mt-5">
+
             <Avatar
               src={userDetails?.personal_details?.usr_profile_pic}
               name={userDetails?.personal_details?.usr_name}
             />
           </div>
-          <div className="col-lg-9 col-md-6" style={{ color: "black" }}>
+          <div className="col-6 " style={{ color: "black" }}>
             <h2 className="mb-4 mt-4 mt-md-0">User Details</h2>
             <div className="card mb-4">
+
               <UserDetails data={userDetails?.personal_details} />
-            </div>            
+            </div>
           </div>
           <div className="row">
-              <div className="col-12">
-                <h2 className="mb-4">Qualification Details</h2>
-                <div className="card">
-                  <table className='TableStyle' border="1">
-                    <thead>
+            <div className="col-12">
+              <h2 className="mb-4">Qualification Details</h2>
+              <div className="card">
+                <table className='TableStyle' border="1">
+                  <thead>
+                    <tr>
+                      <th>Sr #</th>
+                      <th>Degree Title</th>
+                      <th>Institute Name</th>
+                      <th>Starting Date</th>
+                      <th>Ending Date</th>
+                      <th>Trancript</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {QualificationsList.map((item, index) => (
                       <tr>
-                        <th>Sr #</th>
-                        <th>Degree Title</th>
-                        <th>Institute Name</th>
-                        <th>Starting Date</th>
-                        <th>Ending Date</th>
-                        <th>Trancript</th>
+                        <td>{index + 1}</td>
+                        <td>{item[2]}</td>
+                        <td>{item[3]}</td>
+                        <td>{item[4]}</td>
+                        <td>{item[5]}</td>
+
+                        <td >
+                          <a href="/assets/Resumes/31.pdf" target='_blank'>click here</a>
+                        </td>
                       </tr>
-                    </thead>
-                    <tbody>
-                      {QualificationsList.map((item, index) => (
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>{item[2]}</td>
-                          <td>{item[3]}</td>
-                          <td>{item[4]}</td>
-                          <td>{item[5]}</td>
-                          <td>{item[6]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div className="col-12">
-                <h2 className="mb-4 mt-4 mt-md-0">Experience Details</h2>
-                <div className="card">
-                  <table className='TableStyle' border="1">
-                    <thead>
-                      <tr>
-                        <th>Sr #</th>
-                        <th>Job Title</th>
-                        <th>Organization Name</th>
-                        <th>Reference Email</th>
-                        <th>Starting Date</th>
-                        <th>Ending Date</th>
-                        <th>Experiance Letter</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {ExperienceList.map((item, index) => (
-                        <tr>
-                          <td>{index + 1}</td>
-                          <td>{item[2]}</td>
-                          <td>{item[3]}</td>
-                          <td>{item[4]}</td>
-                          <td>{item[5]}</td>
-                          <td>{item[6]}</td>
-                          <td>{item[7]}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
+            <div className="col-12">
+              <h2 className="mb-4 mt-4 mt-md-0">Experience Details</h2>
+              <div className="card">
+                <table className='TableStyle' border="1">
+                  <thead>
+                    <tr>
+                      <th>Sr #</th>
+                      <th>Job Title</th>
+                      <th>Organization Name</th>
+                      <th>Reference Email</th>
+                      <th>Starting Date</th>
+                      <th>Ending Date</th>
+                      <th>Experiance Letter</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {ExperienceList.map((item, index) => (
+                      <tr>
+                        <td>{index + 1}</td>
+                        <td>{item[2]}</td>
+                        <td>{item[3]}</td>
+                        <td>{item[4]}</td>
+                        <td>{item[5]}</td>
+                        <td>{item[6]}</td>
+                        <td >
+                          <a href="/assets/Resumes/31.pdf" target='_blank'>click here</a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
