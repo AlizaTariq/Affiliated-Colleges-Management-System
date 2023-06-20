@@ -10,7 +10,7 @@ class model:
                 database="ACMS",  # write your Dbname
                 host="localhost",
                 user="postgres",
-                password="Ayesha@1306",  # write your dbPassword
+                password="aat",  # write your dbPassword
                 # password="aiman12345",  # write your dbPassword
                 port="5432")
         except Exception as e:
@@ -754,7 +754,7 @@ class model:
                 cursor = self.connection.cursor()
                 query = '''update public.users set usr_name = %s, usr_cnic = %s, usr_email = %s,
                             usr_address = %s, usr_bio = %s, usr_gender = %s, usr_phoneno = %s, 
-                            usr_active_status = %s, usr_profile_pic = %s 
+                            usr_active_status = %s 
                             where usr_id = %s;'''
                 cursor.execute(query,(usr_name,usr_cnic,usr_email,usr_address,usr_bio,usr_gender,usr_phone,usr_active_status,user_id))
                 self.connection.commit()                

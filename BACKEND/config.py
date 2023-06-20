@@ -1,5 +1,5 @@
 DB_HOST = 'localhost'
 DB_USER = 'postgres'
-DB_PASSWORD = 'Ayesha@1306'
+DB_PASSWORD = 'aat'
 DATABASE = 'ACMS'
 SECRET_KEY='xyz123456yresp9'

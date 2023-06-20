@@ -265,7 +265,15 @@ def sendPracticalDuty():
 
     print("CollegeId is : ",collegeId)
     pracId=dbModel.getPracticalDutyId(collegeId,dept,course[0])
-    dbModel.savePracticalDuty(pracId,examiner[3],moreInfo)
+    rdYear=dbModel.getRdYear(pracId)
+
+    print("Pract ID--- ",rdYear)
+    print("Pract ID--- ",dept)
+    print("Pract info--- ",course[0])
+
+    rdId=dbModel.getRoadMapId(rdYear,dept,course[0])
+
+    dbModel.savePracticalDuty(pracId,examiner[3],moreInfo,rdId)
 
     
     userdata = {
@@ -503,6 +511,7 @@ def getAllDuties():
 
 @app.route('/getAllExaminerName',methods = ["GET","POST"]) #Getting all Examiner Details with given examiner_course.
 def getAllExaminerName():
+    NameList=[]
     courseName = request.get_json()
     if len(courseName)!=0:
          NameList  = dbModel.getExaminerNameAccordingToCourseSelection(courseName['courseName'].split("_")[1])

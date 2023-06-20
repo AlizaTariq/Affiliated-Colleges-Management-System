@@ -597,6 +597,7 @@ def UpdateExaminerCourse():
     try :
         data = request.json['data']
         courses = data.split(",")
+        print(courses)
         examiner_id = g.examiner_id
         m = g.model
         if (courses.__len__() > 1) :
