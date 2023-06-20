@@ -768,13 +768,71 @@ class model:
             if cursor != None:
                 cursor.close()
 
+    def ranking(self, examiner_id):
+        cursor = None
+        try:
+            if self.connection:
+                cursor = self.connection.cursor()
+                query = f'''SELECT acceptance_count,rejection_count FROM public.examiner where examiner_id = {examiner_id};'''
+                cursor.execute(query)
+                data = cursor.fetchall()
+                accepting_percentage = 0
+                if(data[0][0]+data[0][1] != 0):
+                    accepting_percentage = (data[0][0]/(data[0][0]+data[0][1])) * 100
+                # print ("accepting_percentage:",accepting_percentage)
+
+                 
+                # for qualification
+                query = f'''SELECT degree_title FROM public.qualification where examiner_id = {examiner_id};'''
+                cursor.execute(query)
+                data = cursor.fetchall()
+                data_list = []
+                for i in data:
+                    data_list.append(i[0].lower())
+
+                qualification_rank = 0
+
+                for i in data_list:
+                    if "phd" in i:
+                        qualification_rank = 9
+                    elif "mphil" in i:
+                        qualification_rank = 7    
+                    elif "bs" in i:
+                        qualification_rank = 5    
+
+                # print("qualification_rank:",qualification_rank)
+
+                # for experience:
+                query = f'''SELECT sum(extract(year from age(ending_date,starting_date))) from public.experience where examiner_id = {examiner_id};'''
+                cursor.execute(query)
+                expdata = cursor.fetchall()
+                exp = 0
+                if expdata[0] == None:
+                    exp = 0
+
+                # print("examinerexp:",exp)
+                rankExaminer = ((accepting_percentage * 0.3) + (qualification_rank * 0.3) + (exp * 0.4))/3
+                # print(rankExaminer)
+                query = f'''update public.examiner set ranking = {rankExaminer} where examiner_id = {examiner_id};'''
+                cursor.execute(query ) 
+                self.connection.commit()
+                return True
+            else:
+                 return False
+        except Exception as e:
+            print("Exception in ranking", str(e))
+            return []
+        finally:
+            if cursor:
+                cursor.close()
+
     # def updateProfile(self, user_id, profile):
         # cursor = None
         # try:
         #     if self.connection != None:
         #         cursor = self.connection.cursor()
         #         query = '''update public.users set usr_profile_pic = %s where usr_id = %s;'''
-        #         cursor.execute(query, profile, user_id)
+        #         cursor.execute(query, (profile, user_id)) 
         #         self.connection.commit()                
         #         return True
         #     else:

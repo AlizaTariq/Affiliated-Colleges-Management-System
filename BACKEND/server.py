@@ -56,7 +56,7 @@ def loginData():
     password = data['password']
     adminObj=UserAdmin(email,password)
     print("admin obj is : ",adminObj)
-    userStatus=False;
+    userStatus=False
     userStatus=dbModel.checkAdminExist(adminObj)
 
     # Creating Access Token For authorization
@@ -513,6 +513,7 @@ def getAllDuties():
 def getAllExaminerName():
     NameList=[]
     courseName = request.get_json()
+    NameList=[]
     if len(courseName)!=0:
          NameList  = dbModel.getExaminerNameAccordingToCourseSelection(courseName['courseName'].split("_")[1])
    
