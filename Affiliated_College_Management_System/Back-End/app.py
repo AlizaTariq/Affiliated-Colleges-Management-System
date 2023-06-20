@@ -18,7 +18,7 @@ from flask_jwt_extended import *
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import requests
 import re
-# pip install phonenumbers                                      
+# pip install phonenumbers
 import phonenumbers
 import os
 import smtplib
@@ -49,6 +49,7 @@ s = URLSafeTimedSerializer('This#Is#Secret')
 app.config['MAIL_DEFAULT_SENDER'] = "elite.express243@gmail.com"
 mail = Mail(app)
 
+
 def is_phone_number_present(phone_number):
     try:
         parsed_number = phonenumbers.parse(phone_number, None)
@@ -66,7 +67,7 @@ def essentials(func):
             g.model = model()
             if request.headers.get('authorization') and get_jwt_identity() != None:
                 g.user_id = get_jwt_identity()
-                g.examiner_id = g.model.getExaminerID(g.user_id)                
+                g.examiner_id = g.model.getExaminerID(g.user_id)
             api_result = func(*args, **kwargs)
             # close connections
             g.model.__del__()
@@ -94,15 +95,15 @@ def SignUpPersonalInfo():
         usr_active_status = True
         _hashed_password = generate_password_hash(usr_password)
 
-        if not is_phone_number_present(usr_phone) :
+        if not is_phone_number_present(usr_phone):
             return jsonify({"status": "fail", "message": "Phone number is not valid"})
-        
-        if not is_cnic_number_present(usr_cnic) :
+
+        if not is_cnic_number_present(usr_cnic):
             return jsonify({"status": "fail", "message": "CNIC is not valid"})
         # set data in obj
         data = User(usr_name, _hashed_password, usr_phone, usr_cnic, usr_profile_pic, usr_address,
-               usr_email, usr_active_status, usr_bio, usr_gender)
-        
+                    usr_email, usr_active_status, usr_bio, usr_gender)
+
         # Insertion in database
         m = g.model
         if m.checkEmailExist(usr_email):
@@ -202,11 +203,11 @@ def ExaminerQualification():
     except Exception as e:
         print("Exception in ExaminerQualification", str(e))
         return jsonify({"status": "fail", "message": str(e)})
-   
+
 @app.route('/ExaminerExperience', methods=["POST", "GET"])
 @jwt_required()
 @essentials
-def ExaminerExperience() :
+def ExaminerExperience():
     try:
         m = g.model
         examiner_id = g.examiner_id
@@ -236,85 +237,65 @@ def ExaminerExperience() :
         print("Exception in ExaminerExp", str(e))
         return jsonify({"status": "fail", "message": str(e)})
 
-@app.route('/verify_email/<token>')
-@jwt_required()
+@app.route('/verify_email')
 @essentials
-def verify_email(token):
-    print("in verification route: \n token is:", token)
+def verify_email():
     try:
-        print(token)
+        code = request.args.get("code")
+        examiner_id = request.args.get("id")
         m = g.model
-        examiner_id = g.examiner_id
-
-        # code = request.args.get('code')
-        # verify =  request.args.get('verify')
 
         # if check_password_hash(verify, "SHHH" + code):
         m.setUserVerified(examiner_id)
-        print("user verified")
-        return jsonify( {"redirect":"http://localhost:3000/ExaminerLogin"})
-        # else:
-        #     return 'Invalid verification code!'
-
+        return jsonify({"message": "Okay"})
     except Exception as e:
         print("Exception in verify", str(e))
         return str(e)
 
-@app.route('/AddExaminerCourse', methods=["POST","GET"])
+@app.route('/AddExaminerCourse', methods=["POST", "GET"])
 @jwt_required()
 @essentials
 def AddExaminerCourse():
-    try :
+    try:
         data = request.json['data']
         courses = data.split(",")
         examiner_id = g.examiner_id
         m = g.model
-        if (courses.__len__() > 1) :
+        if (courses.__len__() > 1):
             e_courses = m.getExaminerCourses(examiner_id)
             examiner_courses = [item[0] for item in e_courses]
-            for i in range (1, courses.__len__()) :
-                if not examiner_courses.__contains__(courses[i]) :
-                    if not m.insertExaminerCourses(examiner_id, courses[i]) :
+            for i in range(1, courses.__len__()):
+                if not examiner_courses.__contains__(courses[i]):
+                    if not m.insertExaminerCourses(examiner_id, courses[i]):
                         return jsonify({"status": "fail", "message": "Insertion issue"})
         m.ranking(examiner_id)
         # print(":)2")
         return jsonify({"message": "Okay"}), 200
     except Exception as e:
-        print("Exception in add course to examiner ",str(e))
+        print("Exception in add course to examiner ", str(e))
         return jsonify({"status": "fail", "message": str(e)})
 
 @app.route('/ExaminerLogin', methods=["POST"])
 @essentials
 def ExaminerLogin():
     try:
-        # print("in login 1")
         # Fetch data from form
         email = request.json.get("email")
         password = request.json.get("password")
-        # print("in login 2")
+
         # Verification
         m = g.model
         examiner_id = m.getExaminerID(m.getUserID(email))
-        # print("in login 3")
-        
-        # token = s.dumps(email, salt='verify_email')
 
-        verification_code = "".join(random.choices(string.ascii_letters + string.digits, k=10))
-        verification_link = f'http://127.0.0.1:5000/verify_email/{verification_code}'
-        # verification_link = url_for('verify_email',token = verification_code, _external=True)
-        # verification_link = request.url_root + 'verify_email' + verification_code + '&verify=' + generate_password_hash("SHHH" + verification_code)
-        # # Insertion in dataBase
-        # email = m.getUserEmail(g.user_id)
-        # print("in login 4")
+        if not (m.checkExaminerVerified(examiner_id)):
+            verification_code = "".join(random.choices(string.ascii_letters + string.digits, k=10))
+            verification_link = f'http://127.0.0.1:3000/Verification?id={examiner_id}&code={verification_code}'
 
-        message = Message('Verify your email', recipients=[email])
-        message.html = f'<div style="background-color: #221e1e; border-radius: 20px; color: wheat; font-family: Tahoma, Verdana, sans-serif; padding: 10px;"><h1 style="text-align: center;"><strong>ٱلسَّلَامُ عَلَيْكُمْ <br /></strong></h1><h2 style="text-align: center;"><span style="color: brown;"> {email} </span></h2><hr/><p>Welcome to Exam Portal, before being able to use your account you need to verify that this is your email address by clicking here: {verification_link}</p><p style="text-align: left;"><span style="color: brown;">If you do not recognize this activity simply ignore this mail.&nbsp;</span></p><p>Kind Regards,<br /><span style="color: brown;"><strong>PUCIT Exam Portal</strong></span></p></div>'
-        # print("in login 5")
-        mail.send(message)
+            message = Message('Verify your email', recipients=[email])
+            message.html = f'<div style="background-color: #221e1e; border-radius: 20px; color: wheat; font-family: Tahoma, Verdana, sans-serif; padding: 10px;"><h1 style="text-align: center;"><strong>ٱلسَّلَامُ عَلَيْكُمْ <br /></strong></h1><h2 style="text-align: center;"><span style="color: brown;"> {email} </span></h2><hr/><p>Welcome to Exam Portal, before being able to use your account you need to verify that this is your email address by clicking here: {verification_link}</p><p style="text-align: left;"><span style="color: brown;">If you do not recognize this activity simply ignore this mail.&nbsp;</span></p><p>Kind Regards,<br /><span style="color: brown;"><strong>PUCIT Exam Portal</strong></span></p></div>'
 
-        # print("mail sent")
-        # if not (m.checkExaminerVerified(examiner_id)):
-        #     return jsonify({"status": "fail", "message": "Verify email first"})
+            mail.send(message)
+            return jsonify({"status": "fail", "message": "Verify email first"})
 
         if not (m.checkEmailExist(email)):
             return jsonify({"status": "fail", "message": "Email does not exist"})
@@ -342,7 +323,7 @@ def profile():
         examiner_id = g.examiner_id
         user_ = m.getDataofUser(g.user_id)
         examiner_ = m.getDataofExaminerForProfile(examiner_id)
-        m.ranking( examiner_id)
+        m.ranking(examiner_id)
         data = {
             "personal_details": {
                 "usr_name": user_[0],
@@ -404,7 +385,7 @@ def DutyDetails():                  # moving from request page to duty details
     try:
         id = request.args.get("Id")
         type_ = request.args.get("type")
-        
+
         m = g.model
         # => using course code get crs code, crs title,
         # => request date, paper upload deadline from exam/duty table
@@ -588,43 +569,43 @@ def UpdateStatus():
         id = request.json.get("Id")
         type_ = request.json.get("type")
         selected_option = request.json.get('selection')
-        
+
         if selected_option == "accept":
             status = 2
         elif selected_option == "reject":
             status = 3
         else:
             return jsonify({"status": "fail", "message": "Status has not Updated Successfully"}), 200
-        
+
         m = g.model
         if m.UpdateStatus(id, status, type_, g.examiner_id):
-            m.ranking( g.examiner_id)
+            m.ranking(g.examiner_id)
             return jsonify({"status": "success", "message": "Status Updated Successfully"})
         return jsonify({"status": "fail", "message": "Status has not Updated Successfully"})
     except Exception as e:
         print("Exception in GetResult", str(e))
         return jsonify({"status": "fail", "message": str(e)})
 
-@app.route('/UpdateExaminerCourse', methods=["POST","GET"])
+@app.route('/UpdateExaminerCourse', methods=["POST", "GET"])
 @jwt_required()
 @essentials
 def UpdateExaminerCourse():
-    try :
+    try:
         data = request.json['data']
         courses = data.split(",")
         examiner_id = g.examiner_id
         m = g.model
-        if (courses.__len__() > 1) :
+        if (courses.__len__() > 1):
             e_courses = m.getExaminerCourses(examiner_id)
             examiner_courses = [item[0] for item in e_courses]
-            for i in range (1, courses.__len__()) :
-                if not examiner_courses.__contains__(courses[i]) :
-                    if not m.insertExaminerCourses(examiner_id, courses[i]) :
+            for i in range(1, courses.__len__()):
+                if not examiner_courses.__contains__(courses[i]):
+                    if not m.insertExaminerCourses(examiner_id, courses[i]):
                         return jsonify({"status": "fail", "message": "Courses have not been updated try later."})
-        
+
         return jsonify({"message": "Data Updated"}), 200
     except Exception as e:
-        print("Exception in update course to examiner ",str(e))
+        print("Exception in update course to examiner ", str(e))
         return jsonify({"status": "fail", "message": "Courses have not been updated try later."})
 
 @app.route('/UpdateExaminer', methods=["POST"])
@@ -657,26 +638,25 @@ def UpdateExaminer():
             resume = f"../front-end//public/assets/Resumes/{user_id}.pdf"
             if Path(resume).is_file():
                 os.remove(resume)
-            f.save(resume)    
-            
+            f.save(resume)
 
         user_ = m.getDataofUser(user_id)
-        
-        if usr_phone != user_[2] and not is_phone_number_present(usr_phone) :
+
+        if usr_phone != user_[2] and not is_phone_number_present(usr_phone):
             return jsonify({"status": "fail", "message": "Phone number is not valid"})
-        
+
         if usr_cnic != user_[1] and not is_cnic_number_present(usr_cnic):
             return jsonify({"status": "fail", "message": "CNIC is not valid"})
 
         if not m.updateUser(user_id, usr_name, usr_cnic, usr_email, usr_address, usr_bio, usr_gender, usr_phone, usr_active_status):
-                return jsonify({"status": "fail", "message": "Data has not updated try again."})
+            return jsonify({"status": "fail", "message": "Data has not updated try again."})
 
         return jsonify({"status": "success", "message": "Data Updated"})
-        
+
     except Exception as e:
         print("Exception in Update user", str(e))
         return jsonify({"status": "fail", "message": "Data has not updated try again."})
 
 # Running app
 if __name__ == '__main__':
-    app.run(debug=True,port=5001)
+    app.run(debug=True, port=5001)

@@ -56,7 +56,7 @@ def loginData():
     password = data['password']
     adminObj=UserAdmin(email,password)
     print("admin obj is : ",adminObj)
-    userStatus=False;
+    userStatus=False
     userStatus=dbModel.checkAdminExist(adminObj)
 
     # Creating Access Token For authorization
