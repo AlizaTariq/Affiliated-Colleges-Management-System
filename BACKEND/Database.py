@@ -1012,6 +1012,7 @@ class DatabaseModel:
 
         try:
             if self.connection != None:
+                print(courseName)
                 cursor = self.connection.cursor()
                 query = "select u.usr_name AS name,u.usr_email,e.examiner_id from users u "\
                     "JOIN public.examiner e ON u.usr_id=e.user_id JOIN "\

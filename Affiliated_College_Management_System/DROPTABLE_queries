@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS public.teacher_feedback;
+DROP TABLE IF EXISTS public.college_review;
+DROP TABLE IF EXISTS public.experience;
+DROP TABLE IF EXISTS public.qualification;
+DROP TABLE IF EXISTS public.examiner_courses;
+DROP TABLE IF EXISTS public.enrolled_department;
+DROP TABLE IF EXISTS public.departments;
+DROP TABLE IF EXISTS public.batch_enrollment;
+DROP TABLE IF EXISTS public.exam_duty;
+DROP TABLE IF EXISTS public.practical_duty;
+DROP TABLE IF EXISTS public.roadmap;
+DROP TABLE IF EXISTS public.affiliated_colleges;
+DROP TABLE IF EXISTS public.admin;
+DROP TABLE IF EXISTS public.examiner;
+DROP TABLE IF EXISTS public."users";

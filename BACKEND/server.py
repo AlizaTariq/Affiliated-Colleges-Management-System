@@ -504,6 +504,7 @@ def getAllDuties():
 @app.route('/getAllExaminerName',methods = ["GET","POST"]) #Getting all Examiner Details with given examiner_course.
 def getAllExaminerName():
     courseName = request.get_json()
+    NameList=[]
     if len(courseName)!=0:
          NameList  = dbModel.getExaminerNameAccordingToCourseSelection(courseName['courseName'].split("_")[1])
    

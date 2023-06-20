@@ -45,7 +45,8 @@ const ExaminerInterest = () => {
             if (response.data["status"] === "fail") {
                 setError(response.data["message"]);
             } else {
-                navigate("/home");
+                localStorage.removeItem('access_token')
+                navigate("/");
             }
         } catch (error) {
             console.error("error: ", error);

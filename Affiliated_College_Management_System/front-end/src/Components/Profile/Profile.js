@@ -69,7 +69,7 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <div className="container py-5" style={{ margin: "auto" }}>
+      <div className="profile_container py-5" style={{ margin: "auto" }}>
 
         <div className="row">
           <div className="col-3 mt-5">

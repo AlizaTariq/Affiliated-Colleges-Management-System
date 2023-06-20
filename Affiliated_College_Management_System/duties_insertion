@@ -1,0 +1,16 @@
+CREATE TABLE IF NOT EXISTS public.roadmap
+(
+    rd_id integer NOT NULL,
+    rd_dept character(2) COLLATE pg_catalog."default" NOT NULL,
+    rd_semester integer,
+    rd_year character(4) COLLATE pg_catalog."default" NOT NULL,
+    rd_crs_code text COLLATE pg_catalog."default" NOT NULL,
+    rd_crs_name text COLLATE pg_catalog."default",
+    rd_prac_status integer,
+    rd_crs_hr integer,
+    rd_crs_book text COLLATE pg_catalog."default",
+    rd_crs_outlline text COLLATE pg_catalog."default",
+    CONSTRAINT roadmap_pkey PRIMARY KEY (rd_crs_code, rd_year, rd_dept, rd_id)
+)
+
+

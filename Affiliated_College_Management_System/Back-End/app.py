@@ -15,6 +15,7 @@ from BusinessObjects import *
 from werkzeug.security import generate_password_hash, check_password_hash
 # pip install flask_jwt_extended
 from flask_jwt_extended import *
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 import requests
 import re
 # pip install phonenumbers                                      
@@ -44,7 +45,7 @@ app.config['MAIL_PASSWORD'] = 'njsopxyyzkkssixt'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-
+s = URLSafeTimedSerializer('This#Is#Secret')
 app.config['MAIL_DEFAULT_SENDER'] = "elite.express243@gmail.com"
 mail = Mail(app)
 
@@ -106,7 +107,6 @@ def SignUpPersonalInfo():
         m = g.model
         if m.checkEmailExist(usr_email):
             return jsonify({"status": "fail", "message": "Email already exists"})
-    
         if m.checkCnicExist(usr_cnic):
             return jsonify({"status": "fail", "message": "CNIC already exists"})
 
@@ -236,23 +236,25 @@ def ExaminerExperience() :
         print("Exception in ExaminerExp", str(e))
         return jsonify({"status": "fail", "message": str(e)})
 
-@app.route('/verify')
+@app.route('/verify_email/<token>')
 @jwt_required()
 @essentials
-def verify():
-    print("in verification route: ")
+def verify_email(token):
+    print("in verification route: \n token is:", token)
     try:
+        print(token)
         m = g.model
         examiner_id = g.examiner_id
 
-        code = request.args.get('code')
-        verify =  request.args.get('verify')
+        # code = request.args.get('code')
+        # verify =  request.args.get('verify')
 
-        if check_password_hash(verify, "SHHH" + code):
-            m.setUserVerified(examiner_id)
-            return redirect("http://localhost:3000")
-        else:
-            return 'Invalid verification code!'
+        # if check_password_hash(verify, "SHHH" + code):
+        m.setUserVerified(examiner_id)
+        print("user verified")
+        return jsonify( {"redirect":"http://localhost:3000/ExaminerLogin"})
+        # else:
+        #     return 'Invalid verification code!'
 
     except Exception as e:
         print("Exception in verify", str(e))
@@ -274,17 +276,7 @@ def AddExaminerCourse():
                 if not examiner_courses.__contains__(courses[i]) :
                     if not m.insertExaminerCourses(examiner_id, courses[i]) :
                         return jsonify({"status": "fail", "message": "Insertion issue"})
-        
-        verification_code = "".join(random.choices(string.ascii_letters + string.digits, k=10))
-        verification_link = request.url_root + 'verify?code=' + verification_code + '&verify=' + generate_password_hash("SHHH" + verification_code)
-
-        # Insertion in dataBase
-        email = m.getUserEmail(g.user_id)
-
-        message = Message('Verify your email', recipients=[email])
-        message.html = f'<div style="background-color: #221e1e; border-radius: 20px; color: wheat; font-family: Tahoma, Verdana, sans-serif; padding: 10px;"><h1 style="text-align: center;"><strong>ٱلسَّلَامُ عَلَيْكُمْ <br /></strong></h1><h2 style="text-align: center;"><span style="color: brown;"> {m.getUserEmail(g.user_id)} </span></h2><hr/><p>Welcome to Exam Portal, before being able to use your account you need to verify that this is your email address by clicking here: {verification_link}</p><p style="text-align: left;"><span style="color: brown;">If you do not recognize this activity simply ignore this mail.&nbsp;</span></p><p>Kind Regards,<br /><span style="color: brown;"><strong>PUCIT Exam Portal</strong></span></p></div>'
-        # print(":)")
-        mail.send(message)
+        m.ranking(examiner_id)
         # print(":)2")
         return jsonify({"message": "Okay"}), 200
     except Exception as e:
@@ -295,23 +287,44 @@ def AddExaminerCourse():
 @essentials
 def ExaminerLogin():
     try:
+        # print("in login 1")
         # Fetch data from form
         email = request.json.get("email")
         password = request.json.get("password")
+        # print("in login 2")
         # Verification
         m = g.model
         examiner_id = m.getExaminerID(m.getUserID(email))
+        # print("in login 3")
+        
+        # token = s.dumps(email, salt='verify_email')
+
+        verification_code = "".join(random.choices(string.ascii_letters + string.digits, k=10))
+        verification_link = f'http://127.0.0.1:5000/verify_email/{verification_code}'
+        # verification_link = url_for('verify_email',token = verification_code, _external=True)
+        # verification_link = request.url_root + 'verify_email' + verification_code + '&verify=' + generate_password_hash("SHHH" + verification_code)
+        # # Insertion in dataBase
+        # email = m.getUserEmail(g.user_id)
+        # print("in login 4")
+
+        message = Message('Verify your email', recipients=[email])
+        message.html = f'<div style="background-color: #221e1e; border-radius: 20px; color: wheat; font-family: Tahoma, Verdana, sans-serif; padding: 10px;"><h1 style="text-align: center;"><strong>ٱلسَّلَامُ عَلَيْكُمْ <br /></strong></h1><h2 style="text-align: center;"><span style="color: brown;"> {email} </span></h2><hr/><p>Welcome to Exam Portal, before being able to use your account you need to verify that this is your email address by clicking here: {verification_link}</p><p style="text-align: left;"><span style="color: brown;">If you do not recognize this activity simply ignore this mail.&nbsp;</span></p><p>Kind Regards,<br /><span style="color: brown;"><strong>PUCIT Exam Portal</strong></span></p></div>'
+        # print("in login 5")
+        mail.send(message)
+
+        # print("mail sent")
         # if not (m.checkExaminerVerified(examiner_id)):
         #     return jsonify({"status": "fail", "message": "Verify email first"})
 
         if not (m.checkEmailExist(email)):
             return jsonify({"status": "fail", "message": "Email does not exist"})
-
+        print("email validatred in db")
         usr_pass = m.getUserPassword(email)
 
         if not (check_password_hash(usr_pass, password)):
             return jsonify({"status": "fail", "message": "Invalid Password"})
         examiner_id = m.ValidatePassword(email, usr_pass)
+        print("password validatred in db")
         if (examiner_id > 0):
             access_token = create_access_token(identity=m.getUserID(email), expires_delta=timedelta(hours=24))
             return jsonify(access_token=access_token), 200
@@ -329,6 +342,7 @@ def profile():
         examiner_id = g.examiner_id
         user_ = m.getDataofUser(g.user_id)
         examiner_ = m.getDataofExaminerForProfile(examiner_id)
+        m.ranking( examiner_id)
         data = {
             "personal_details": {
                 "usr_name": user_[0],
@@ -584,6 +598,7 @@ def UpdateStatus():
         
         m = g.model
         if m.UpdateStatus(id, status, type_, g.examiner_id):
+            m.ranking( g.examiner_id)
             return jsonify({"status": "success", "message": "Status Updated Successfully"})
         return jsonify({"status": "fail", "message": "Status has not Updated Successfully"})
     except Exception as e:
